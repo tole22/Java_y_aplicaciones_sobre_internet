@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:h="http://java.sun.com/jsf/html"
+				template="/views/templates/defaultTemplate.xhtml">
+	<ui:define name="title">
+		<h:outputText value="CEDICA | CAPACITACION"/>
+	</ui:define>
+	<ui:define name="header">
+		<ui:include src="/views/menu_principal.xhtml"></ui:include>
+	</ui:define>
+	<ui:define name="nav-left">		
+		<ui:include src="/views/nav-left.xhtml" />
+	</ui:define>
+	<ui:define name="body-content">	
+		<section>
+			<hgroup>
+				<h1 class="pagetitle">Curso de Terapias y Actividades Asistidas con Caballos (TACA)</h1>
+			</hgroup>
+		</section>
+		<section>
+			<h:graphicImage library="imagenes" name="cedica_tacas.png" width="320" height="300" ></h:graphicImage>
+			<p>El <strong>Curso de Terapias y Actividades Asistidas con Caballos (TACA) de CEDICA</strong> es el resultado de la trayectoria de una institución de dos décadas de experiencia en la materia, que ha sabido no sólo profesionalizarse en la disciplina sino que también ha diseñado los procesos de trabajo y la gestión específica que hace a una organización dedicada a las TACA.</p>							
+		</section>
+	</ui:define>
+</ui:composition>

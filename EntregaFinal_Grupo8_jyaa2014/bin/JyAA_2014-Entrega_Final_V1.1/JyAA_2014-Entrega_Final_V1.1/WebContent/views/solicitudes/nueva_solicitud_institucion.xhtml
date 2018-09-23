@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:h="http://java.sun.com/jsf/html"
+				template="/views/templates/defaultTemplate.xhtml">
+	<ui:define name="title">
+		<h:outputText value="CEDICA | #{sessionScope.perfil}"/>
+	</ui:define>
+	<ui:define name="header">		
+		<ui:include src="/views/#{sessionScope.perfil}/menu.xhtml"></ui:include>			
+	</ui:define>	
+	<ui:define name="nav-left">		
+		<ui:include src="/views/#{sessionScope.perfil}/nav-left.xhtml" />
+	</ui:define>
+	<ui:define name="body-content">
+		#{param.nueva != null ? SolicitudBean.reinit() : null}	
+		<h1>FORMULARIO de SOLICITUD de VACANTE CEDICA</h1>
+		<h2>(Alumnos de Instituciones)</h2>		
+		<p:graphicImage library="imagenes" name="cedica_logo.jpg" style="width:10%;float:right;"/>
+		<h3>
+			<h:outputText value="Estimado familiar o tutor, le agradeceremos complete paso a paso la información requerida para comenzar el Proceso de
+								Admisión a CEDICA. Muchas gracias!"/>
+		</h3>		
+		<div style="text-align:left;margin-right:11%;">			
+			<p onclick="PF('leerAntes').toggle();" style="cursor:pointer;color:white;margin:0;padding-left:1%;background-color:orange;" > Leer!</p>
+			<p:fieldset toggleable="true" collapsed="true" style="border-color: orange;border-radius:0;margin:0;" widgetVar="leerAntes">			
+				Estimad@/s Profesional, <br /> <br />
+				<p>
+					El <b>Centro de Equitación para Personas con Discapacidad
+						y Carenciadas -CEDICA-</b> es una <i><b>Asociación Civil
+							sin Fines de Lucro</b></i> que trabaja desde 1994 en la ciudad de
+					La Plata con la finalidad de igualar oportunidades, en
+					procura de la reinserción familiar, el logro de la
+					escolaridad, la integración laboral y la mejora integral de
+					la calidad de vida. Nuestra tarea se denomina Terapias y
+					Actividades Asistidas con Caballos, aunque en Argentina se la
+					conoce habitualmente como Equinoterapia.
+				</p>
+				<p>Las Terapias asistidas con caballos son un abordaje
+					integral y complementario, cuyo objetivo es el bienestar de
+					las personas a nivel biológico, psíquico y social. Requieren
+					profesionales licenciados para ser llevadas a cabo. Las
+					Actividades asistidas con caballos buscan lograr adquirir
+					habilidades ecuestres que favorezcan los procesos mentales,
+					emocionales y sociales de las personas. Las actividades
+					ecuestres pueden ser descriptas como terapéuticas porque
+					benefician a las personas en este sentido, pero no
+					constituyen una terapia o tratamiento.</p>
+				<p>Los alumnos y alumnas del CEDICA son personas con
+					distintos niveles de discapacidad física y/o mental, que
+					pueden presentar patologías asociadas, así como individuos en
+					situaciones de riesgo y vulnerabilidad social. La mayoría de
+					nuestros alumnos provienen de Centros de Salud, Institutos de
+					Menores, Hogares y Hospitales o familias vulnerables. Las
+					actividades de CEDICA son gratuitas para todos los alumnos y
+					alumnas, quienes son becados por la institución.</p>
+				<p>Agradecemos complete la información requerida sobre el
+					alumno para comenzar el Proceso de Admisión a CEDICA. En caso
+					de no conocer alguna información, referir aquella con la que
+					la institución cuente actualmente.</p><br />
+				<p  style="text-align:right !important;"> Muchas gracias!</p>
+			</p:fieldset >
+		</div>		 
+		<h:form id="formSolicitud">				
+			<p:growl id="msgsSolicitud" sticky="true" showDetail="true"  showSummary="false" autoUpdate="true"/>
+			<p:wizard	widgetVar="solicitudWiz" nextLabel="Siguiente" backLabel="Atrás" >
+				<p:tab id="datosInstitucion">
+					<f:facet name="title" >
+						<p:outputLabel  value="1. Datos de la Institución" onclick="PF('solicitudWiz').loadStep('datosInstitucion',true);" style="cursor:pointer;"/>
+					</f:facet>
+					<p:fieldset legend="Datos de la Institución" toggleable="true" toggleSpeed="500" style="text-align:left;">
+						<h:panelGrid columns="1" cellpadding="5" >											        
+							<h:panelGrid columns="3" cellpadding="5" >								
+								<p:outputLabel for="institucion" value="Institución:"/>
+								<h:outputText id="institucion" value="#{sessionScope.institucionLogueada.nombre} - #{sessionScope.institucionLogueada.localidad} - #{sessionScope.institucionLogueada.vacantes} vacantes" rendered="#{sessionScope.institucionLogueada != null ? 'true' : 'false' }"/>								
+								<p:selectOneMenu id="institucion2" value="#{SolicitudBean.solicitud.institucion}" var="institucion" 
+												rendered="#{sessionScope.institucionLogueada != null ? 'false' : 'true' }"
+												converter="converterInstitucion">
+									<f:selectItems value="#{InstitucionBean.lista}" var="inst" itemLabel="#{inst.nombre} - #{inst.localidad}" 
+													itemValue="#{inst}" />
+									<p:column>
+										#{institucion.nombre} - #{institucion.localidad} 
+									</p:column>
+									<p:column>
+										#{institucion.vacantes} vacantes
+									</p:column>									
+								</p:selectOneMenu>
+								<p:commandLink value="agregar una nueva institución.." onclick="PF('dialogoAgregarInstitucion').show();" rendered="#{sessionScope.institucionLogueada != null ? 'false' : 'true' }"/>
+								#{sessionScope.institucionLogueada != null ? SolicitudBean.solicitud.setInstitucion(sessionScope.institucionLogueada) : null }																																							
+					       	</h:panelGrid>					       	
+					    </h:panelGrid>
+					</p:fieldset>
+				</p:tab>
+				<p:tab id="datosalumno">					
+					<f:facet name="title" >
+						<p:outputLabel  value="2. Datos del alumno y sus Familiares" onclick="PF('solicitudWiz').loadStep('datosalumno',true);" style="cursor:pointer;"/>
+					</f:facet>					
+					<p:fieldset legend="Datos del alumno" toggleable="true" toggleSpeed="500" style="text-align:left;">
+						<h:panelGrid columns="1" cellpadding="5" >											        
+							<h:panelGrid columns="3" cellpadding="5" >
+					       		<p:outputLabel for="nombrealumno" value="Nombre:"/>
+					       		<p:inputText id="nombrealumno" value="#{SolicitudBean.solicitud.alumno.nombre}" required="true" label="Nombre del alumno"/>
+					       		<p:message for="nombrealumno" display="icon"/>
+					       		<p:outputLabel for="apellidoalumno" value="Apellido:"/>
+					       		<p:inputText id="apellidoalumno" value="#{SolicitudBean.solicitud.alumno.apellido}" required="true" label="Apellido del alumno"/>
+					       		<p:message for="apellidoalumno" display="icon"/>
+					       		<p:outputLabel for="dnialumno" value="DNI:"/>
+					       		<p:inputText id="dnialumno" value="#{SolicitudBean.solicitud.alumno.dni}" required="true" disabled="#{SolicitudBean.solicitud.estado != null ? 'true' : 'false'}" label="DNI del alumno"/>
+					       		<p:message for="dnialumno" display="icon"/>
+					       		<p:outputLabel for="sexoAlumno" value="Sexo:"/>
+					       		<p:selectOneRadio layout="grid" columns="2" id="sexoAlumno" value="#{SolicitudBean.solicitud.alumno.sexo}"  label="Sexo del alumno">
+					       			<f:selectItem itemLabel="Masc." itemValue="Masc."/>
+					       			<f:selectItem itemLabel="Fem." itemValue="Fem."/>
+					       		</p:selectOneRadio>
+					       		<p:message for="sexoAlumno" display="icon"/>
+					       		<p:outputLabel for="lugarNacalumno" value="Lugar de Nacimiento:"/>
+					       		<p:inputText id="lugarNacalumno" value="#{SolicitudBean.solicitud.alumno.lugarDeNac}" label="Lugar de nacimiento del alumno"/>
+					       		<p:message for="lugarNacalumno" display="icon"/>	
+					       		<p:outputLabel for="fechaNacalumno" value="Fecha de Nacimiento:"/>
+					       		<p:inputMask id="fechaNacalumno" value="#{SolicitudBean.solicitud.alumno.fechaDeNac}" label="Fecha de nacimiento del alumno" mask="99/99/9999" >
+					       			<f:convertDateTime for="fechaNacalumno" dateStyle="medium" type="date"  />
+					       		</p:inputMask>					       		
+					       		<p:message for="fechaNacalumno" display="icon"/>
+					       		<p:outputLabel for="edadAlumno" value="Edad:"/>
+					       		<p:inputText id="edadAlumno" value="#{SolicitudBean.solicitud.alumno.edad}" label="Edad del alumno"/>
+					       		<p:message for="edadAlumno" display="icon"/>	
+					       		<p:outputLabel for="domicilioalumno" value="Domicilio:"/>
+					       		<p:inputText id="domicilioalumno" value="#{SolicitudBean.solicitud.alumno.domicilio}" label="Domicilio del alumno"/>
+					       		<p:message for="domicilioalumno" display="icon"/>	
+					       		<p:outputLabel for="telalumno" value="Teléfono:"/>
+					       		<p:inputText id="telalumno" value="#{SolicitudBean.solicitud.alumno.telefono}" label="Teléfono del alumno"/>
+					       		<p:message for="telalumno" display="icon"/>						            
+					        </h:panelGrid>						    						   
+						</h:panelGrid>
+				    </p:fieldset>				    
+				    <p:fieldset legend="Datos de Familiares" toggleable="true" toggleSpeed="500" style="text-align:left;">
+						<h:panelGrid id="familiares" columns="1" cellpadding="5" >
+							<f:facet name="header">
+								<h:outputText value="Familiar" />
+								<h6>Complete los datos y presione en el botón + para agregar al familiar.</h6>								
+							</f:facet>											        
+							<h:panelGrid columns="3" cellpadding="5" >								
+					       		<p:outputLabel for="nombreFamiliar" value="Nombre:"/>
+					       		<p:inputText id="nombreFamiliar" value="#{SolicitudBean.familiar.nombre}"  label="Nombre del familiar" />					       			
+					       		<p:message for="nombreFamiliar" display="icon"/>
+					       		<p:outputLabel for="apellidoFamiliar" value="Apellido:"/>
+					       		<p:inputText id="apellidoFamiliar" value="#{SolicitudBean.familiar.apellido}"  label="Apellido del familiar"/>
+					       		<p:message for="apellidoFamiliar" display="icon"/>
+					       		<p:outputLabel for="dniFamiliar" value="DNI:"/>
+					       		<p:inputText id="dniFamiliar" value="#{SolicitudBean.familiar.dni}" label="DNI del familiar"/>
+					       		<p:message for="dniFamiliar" display="icon"/>
+					       		<p:outputLabel for="ParentescoFamiliar" value="Parentesco:"/>
+					       		<p:selectOneMenu id="ParentescoFamiliar" value="#{SolicitudBean.familiar.parentesco}"  label="Parentesco del familiar">
+					       			<f:selectItem itemLabel="Padre" itemValue="Padre" />
+					       			<f:selectItem itemLabel="Madre" itemValue="Madre" />
+					       			<f:selectItem itemLabel="Hermano(a)" itemValue="Hermano(a)" />
+					       			<f:selectItem itemLabel="Abuelo(a)" itemValue="Abuelo(a)" />
+					       			<f:selectItem itemLabel="Tutor" itemValue="Tutor" />
+					       			<f:selectItem itemLabel="Otro" itemValue="Otro" />					       			
+					       		</p:selectOneMenu>
+					       		<p:message for="ParentescoFamiliar" display="icon"/>					       		
+					       		<p:outputLabel for="domicilioFamiliar" value="Domicilio:"/>
+					       		<p:inputText id="domicilioFamiliar" value="#{SolicitudBean.familiar.domicilio}" label="Domicilio del familiar"/>
+					       		<p:message for="domicilioFamiliar" display="icon"/>	
+					       		<p:outputLabel for="telFamiliar" value="Teléfono:"/>
+					       		<p:inputText id="telFamiliar" value="#{SolicitudBean.familiar.telefono}" label="Teléfono del familiar"/>
+					       		<p:message for="telFamiliar" display="icon"/>
+					       		<p:outputLabel for="celFamiliar" value="Celular:"/>
+					       		<p:inputText id="celFamiliar" value="#{SolicitudBean.familiar.celular}" label="Celular del familiar"/>
+					       		<p:message for="celFamiliar" display="icon"/>
+					       		<p:outputLabel for="mailFamiliar" value="E-mail:"/>
+					       		<p:inputText id="mailFamiliar" value="#{SolicitudBean.familiar.mail}" label="Email del familiar"/>
+					       		<p:message for="mailFamiliar" display="icon"/>
+					       		<p:outputLabel for="actFamiliar" value="Actividad:"/>
+					       		<p:inputText id="actFamiliar" value="#{SolicitudBean.familiar.actividad}" label="Actividad del alumno"/>
+					       		<p:message for="actFamiliar" display="icon"/>						            
+					        </h:panelGrid>						    						   
+						</h:panelGrid>
+						<p:commandLink value="+" title="Agregar Familiar" update="familiares familiaresAgregados" action="#{SolicitudBean.reinitFamiliar}" process="@parent">
+							<p:collector unique="false" value="#{SolicitudBean.familiar}" addTo="#{SolicitudBean.familiares}" />
+						</p:commandLink>
+						<br/>						
+						<br/>
+						<h:outputText value="Familiares agregados"/>												
+						<p:dataList  id="familiaresAgregados" value="#{SolicitudBean.familiares}" var="familiar" 
+									emptyMessage="No se han agregado familiares aún..." style="text-align:center !important;">
+							<h:panelGrid columns="2" cellpadding="8">
+								<h:outputLabel value="Parentesco:"/>
+								<h:outputText value="#{familiar.parentesco}"/>
+								<h:outputLabel value="Apellido y Nombre:"/>
+								<h:outputText value="#{familiar.apellido},#{familiar.nombre}"/>
+								<h:outputLabel value="DNI:"/>
+								<h:outputText value="#{familiar.dni}"/>
+								<h:outputLabel value="Teléfono:"/>
+								<h:outputText value="#{familiar.telefono}"/>
+								<h:outputLabel value="Domicilio:"/>
+								<h:outputText value="#{familiar.domicilio}"/>
+								<h:outputLabel value="Actividad:"/>
+								<h:outputText value="#{familiar.actividad}"/>
+								<p:commandLink value="x" title="Quitar Familiar" update="familiaresAgregados" process="@parent" >
+									<p:collector unique="false" value="#{familiar}" removeFrom="#{SolicitudBean.familiares}" />
+								</p:commandLink>
+							</h:panelGrid>					        					        
+					    </p:dataList>						
+				    </p:fieldset>
+				</p:tab>				
+				<p:tab id="datosPrevisionales">
+					<f:facet name="title" >
+						<p:outputLabel  value="3. Situación Previsional y Socio-económica" onclick="PF('solicitudWiz').loadStep('datosPrevisionales',true);" style="cursor:pointer;"/>
+					</f:facet>
+					<p:fieldset legend="Situación Previsional" toggleable="true" toggleSpeed="500" style="text-align:left;">
+						<h:panelGrid columns="1" cellpadding="5" >											        
+							<h:panelGrid columns="3" cellpadding="5" >
+					       		<p:outputLabel for="obraSocial" value="Obra Social:"/>
+					       		<p:inputText id="obraSocial" value="#{SolicitudBean.solicitud.alumno.obraSocial}" label="Obra Social del alumno"/>
+					       		<p:message for="obraSocial" display="icon"/>
+					       		<p:outputLabel for="nroAfiliadoOS" value="Nro. de Afiliado:"/>
+					       		<p:inputText id="nroAfiliadoOS" value="#{SolicitudBean.solicitud.alumno.nroAfiliadoOS}"  label="Nro. de Afiliado del alumno"/>
+					       		<p:message for="nroAfiliadoOS" display="icon"/>
+					       		<p:outputLabel for="poseeCuratela" value="¿Posee Curatela?:"/>
+					       		<p:selectBooleanCheckbox id="poseeCuratela" value="#{SolicitudBean.solicitud.alumno.poseeCuratela}"  label="Curatela del alumno"/>
+					       		<p:message for="poseeCuratela" display="icon"/>
+					       		<p:outputLabel for="observacionesOS" value="Observaciones:"/>
+					       		<p:inputTextarea id="observacionesOS" value="#{SolicitudBean.solicitud.alumno.observacionesOS}" label="Observaciones del alumno"/>
+					       		<p:message for="observacionesOS" display="icon"/>					       							            
+					        </h:panelGrid>						   						   
+						</h:panelGrid>
+				    </p:fieldset>
+				    <p:fieldset legend="Situación Socio-económica"  toggleable="true" toggleSpeed="500" style="text-align:left;">
+						<h:panelGrid columns="1" cellpadding="5" >											        
+							<h:panelGrid columns="1" cellpadding="5" >
+					       		<p:outputLabel for="ingresos" value="Indique el rango de los ingresos familiares mensuales (considere los ingresos de las personas que conviven con el alumno):"/>
+					       		<p:selectOneMenu id="ingresos" value="#{SolicitudBean.solicitud.alumno.ingresos}"  label="Ingresos del alumno">
+					       			<f:selectItem itemLabel="Menos de $500 mensuales" itemValue="Menos de $500 mensuales" />
+					       			<f:selectItem itemLabel="Entre $500 y $1500" itemValue="Entre $500 y $1500" />
+					       			<f:selectItem itemLabel="Entre $1500 y $3000" itemValue="Entre $1500 y $3000" />
+					       			<f:selectItem itemLabel="Entre $3000 y $5000" itemValue="Entre $3000 y $5000" />
+					       			<f:selectItem itemLabel="Entre $5000 y $10000" itemValue="Entre $5000 y $10000" />
+					       			<f:selectItem itemLabel="Más de $10000" itemValue="Más de $10000" />
+					       		</p:selectOneMenu>
+					       		<p:message for="ingresos" display="icon"/>
+					       		<p:outputLabel for="vivienda" value="Indique si el alumno y su familia o convivientes residen en:"/>
+					       		<p:selectOneMenu id="vivienda" value="#{SolicitudBean.solicitud.alumno.vivienda}"  label="Vivienda del alumno">
+					       			<f:selectItem itemLabel="Casa propia" itemValue="Casa propia" />
+					       			<f:selectItem itemLabel="Casa propia en proceso de pago de hipoteca o similar" itemValue="Casa propia en proceso de pago de hipoteca o similar" />
+					       			<f:selectItem itemLabel="Casa alquilada" itemValue="Casa alquilada" />
+					       			<f:selectItem itemLabel="Casa cedida o prestada" itemValue="Casa cedida o prestada" />					       			
+					       		</p:selectOneMenu>
+					       		<p:message for="vivienda" display="icon"/>
+					       		<p:outputLabel for="cantResponsables" value="¿Cuántas personas en el hogar donde vive el alumno son responsables económicamente del mismo?:"/>
+					       		<p:selectOneMenu id="cantResponsables" value="#{SolicitudBean.solicitud.alumno.cantResponsables}"  label="Responsables del alumno">
+					       			<f:selectItem itemLabel="1" itemValue="1" />
+					       			<f:selectItem itemLabel="2" itemValue="2" />
+					       			<f:selectItem itemLabel="3 o más" itemValue="3 o más" />					       								       			
+					       		</p:selectOneMenu>
+					       		<p:message for="cantResponsables" display="icon"/>
+					       		<p:outputLabel for="cantPersonasACargo" value="¿Cuántas personas del hogar son menores de edad o se encuentran a cargo de los responsables económicos?:"/>
+					       		<p:selectOneMenu id="cantPersonasACargo" value="#{SolicitudBean.solicitud.alumno.cantPersonasACargo}"  label="Personas a cargo del responsable">
+					       			<f:selectItem itemLabel="1" itemValue="1" />
+					       			<f:selectItem itemLabel="2" itemValue="2" />
+					       			<f:selectItem itemLabel="3 o más" itemValue="3 o más" />					       								       								       			
+					       		</p:selectOneMenu>
+					       		<p:message for="cantPersonasACargo" display="icon"/>
+					       		<p:outputLabel for="poseeAuto" value="Las personas que conviven con el alumno, ¿poseen automóvil?:"/>					       		
+					       		<p:selectBooleanCheckbox id="poseeAuto" value="#{SolicitudBean.solicitud.alumno.poseeAuto}"  label="Automovil alumno"/>					
+					       		<p:message for="poseeAuto" display="icon"/>       							            
+					        </h:panelGrid>
+					    </h:panelGrid>
+				    </p:fieldset>
+				</p:tab>
+				<p:tab id="datosEscolares">
+					<f:facet name="title" >
+						<p:outputLabel  value="4. Historia Escolar y Derivación a CEDICA" onclick="PF('solicitudWiz').loadStep('datosEscolares',true);" style="cursor:pointer;"/>
+					</f:facet>
+					<p:fieldset legend="Historia Escolar" toggleable="true" toggleSpeed="500" style="text-align:left;">
+						<h:panelGrid columns="1" cellpadding="5" >											        
+							<h:panelGrid columns="3" cellpadding="5" >
+					       		<p:outputLabel for="escuelas" value="Escuelas a las que Asistió"/>
+					       		<p:inputTextarea id="escuelas" value="#{SolicitudBean.solicitud.alumno.escuelas}" label="Escuelas del alumno"/>
+					       		<p:message for="escuelas" display="icon"/>
+					       		<p:outputLabel for="nivelEducativo" value="Nivel Educativo:"/>
+					       		<p:selectOneMenu id="nivelEducativo" value="#{SolicitudBean.solicitud.alumno.nivelEducativo}"  label="Nivel Educativo del alumno">
+					       			<f:selectItem itemLabel="Primario" itemValue="Primario" />
+					       			<f:selectItem itemLabel="Secundario" itemValue="Secundario" />
+					       			<f:selectItem itemLabel="Superior" itemValue="Superior" />
+					       		</p:selectOneMenu>
+					       		<p:message for="nivelEducativo" display="icon"/>					       						       							            
+					        </h:panelGrid>						    						   
+						</h:panelGrid>
+				    </p:fieldset>				    
+				</p:tab>
+				<p:tab id="datosHistoriaClinica">
+					<f:facet name="title" >
+						<p:outputLabel  value="5. Histoira Clínica" onclick="PF('solicitudWiz').loadStep('datosHistoriaClinica',true);" style="cursor:pointer;"/>
+					</f:facet>
+					<p:fieldset legend="Historia Clínica" toggleable="true" toggleSpeed="500" style="text-align:left;">
+						<h:panelGrid columns="1" cellpadding="5" >											        
+							<h:panelGrid columns="3" cellpadding="5" >
+					       		<p:outputLabel for="dificultades" value="Dificultades:"/>
+					       		<p:inputTextarea id="dificultades" value="#{SolicitudBean.solicitud.alumno.dificultades}" label="Dificultades del alumno"/>
+					       		<p:message for="dificultades" display="icon"/>
+					       		<p:outputLabel for="patologia" value="Patología:"/>
+					       		<p:inputTextarea id="patologia" value="#{SolicitudBean.solicitud.alumno.patologia}" label="Patología del alumno"/>
+					       		<p:message for="patologia" display="icon"/>
+					       		<p:outputLabel for="habitos" value="Hábitos:"/>
+					       		<p:inputTextarea id="habitos" value="#{SolicitudBean.solicitud.alumno.habitos}"  label="Habitos del alumno"/>
+					       		<p:message for="habitos" display="icon"/>					       		
+					       		<p:outputLabel for="alimentacion" value="Alimentación:"/>
+					       		<p:inputTextarea id="alimentacion" value="#{SolicitudBean.solicitud.alumno.alimentacion}" label="Alimentación del alumno"/>
+					       		<p:message for="alimentacion" display="icon"/>
+					       		<p:outputLabel for="poseeCertDisc" value="¿Posee Certificado de Discapacidad?:"/>
+					       		<p:selectOneRadio layout="grid" columns="2" id="poseeCertDisc" value="#{SolicitudBean.solicitud.alumno.poseeCertDisc}"  label="Cert. de Discapacidad del alumno">
+					       			<f:selectItem itemLabel="Si" itemValue="true"/>
+					       			<f:selectItem itemLabel="No" itemValue="false"/>
+					       		</p:selectOneRadio>
+					       		<p:message for="poseeCertDisc" display="icon"/>
+					       		<p:outputLabel for="diagnostico" value="¿Con qué diagnóstico?:"/>
+					       		<p:inputTextarea id="diagnostico" value="#{SolicitudBean.solicitud.alumno.diagnostico}" label="Diagnóstico del alumno"/>
+					       		<p:message for="diagnostico" display="icon"/>	
+					       		<p:outputLabel for="observacionesHC" value="Observaciones:"/>
+					       		<p:inputTextarea id="observacionesHC" value="#{SolicitudBean.solicitud.alumno.observacionesHC}" label="Observaciones HC del alumno"/>
+					       		<p:message for="observacionesHC" display="icon"/>					       							            
+					        </h:panelGrid>						    						   
+						</h:panelGrid>
+				    </p:fieldset>
+				</p:tab>
+				<p:tab id="datosExtras">
+					<f:facet name="title" >
+						<p:outputLabel  value="6. Información Adicional" onclick="PF('solicitudWiz').loadStep('datosExtras',true);" style="cursor:pointer;"/>
+					</f:facet>
+					<p:fieldset legend="Observaciones Adicionales" toggleable="true" toggleSpeed="500" style="text-align:left;">
+						<h:panelGrid columns="1" cellpadding="5" >											        
+							<h:panelGrid columns="3" cellpadding="5" >
+								<p:outputLabel for="otraInfo" value="Otras observaciones:"/>
+					       		<p:inputTextarea id="otraInfo" value="#{SolicitudBean.solicitud.alumno.otraInfo}" label="Observaciones generales del alumno"/>
+					       		<p:message for="otraInfo" display="icon"/>
+					       		<p:outputLabel for="docPresentada" value="Documentación Presentada:"/>
+					       		<p:inputTextarea id="docPresentada" value="#{SolicitudBean.solicitud.alumno.docPresentada}" label="Documentación presentada por el alumno"/>
+					       		<p:message for="docPresentada" display="icon"/>
+					       	</h:panelGrid>					       	
+					    </h:panelGrid>
+					</p:fieldset>
+				</p:tab>
+				<p:tab id="resumen" >
+					<f:facet name="title" >
+						<p:outputLabel  value="7. Resumen" onclick="PF('solicitudWiz').loadStep('resumen',true);" style="cursor:pointer;"/>
+					</f:facet>
+					<p:outputPanel style="text-align:left;">					
+						<h:panelGrid columns="1" cellpadding="5" >
+							<p:outputPanel>									
+								<h2><h:outputText value="Resumen de la Solicitud"/></h2>
+								<h:panelGrid columns="2" cellpadding="2" >
+									<f:facet name="header">
+										<h:outputText value="1. Datos de la Institución"/>
+									</f:facet>
+									<p:outputLabel for="institucionRes" value="Institución:"/>
+						       		<h:outputText id="institucionRes" value="#{SolicitudBean.solicitud.institucion.nombre} - #{SolicitudBean.solicitud.institucion.localidad} - #{SolicitudBean.solicitud.institucion.vacantes} vacantes"/>						       				       		
+						       	</h:panelGrid>																								        
+								<h:panelGrid columns="2" cellpadding="2" >
+									<f:facet name="header">
+										<h:outputText value="2. Datos del alumno"/>
+									</f:facet>
+									<p:outputLabel for="nombrealumnoRes" value="Nombre:"/>
+						       		<h:outputText id="nombrealumnoRes" value="#{SolicitudBean.solicitud.alumno.nombre}"  label="Nombre del alumno"/>				       		
+						       		<p:outputLabel for="apellidoalumnoRes" value="Apellido:"/>
+						       		<h:outputText id="apellidoalumnoRes" value="#{SolicitudBean.solicitud.alumno.apellido}"  label="Apellido del alumno"/>				       		
+						       		<p:outputLabel for="dnialumnoRes" value="DNI:"/>
+						       		<h:outputText id="dnialumnoRes" value="#{SolicitudBean.solicitud.alumno.dni}"  label="DNI del alumno"/>
+						       		<p:outputLabel for="sexoAluRes" value="Sexo:"/>
+						       		<h:outputText id="sexoAluRes" value="#{SolicitudBean.solicitud.alumno.sexo}"  label="Sexo del alumno"/>				       		
+						       		<p:outputLabel for="lugarNacalumnoRes" value="Lugar de Nacimiento:"/>
+						       		<h:outputText id="lugarNacalumnoRes" value="#{SolicitudBean.solicitud.alumno.lugarDeNac}" label="Lugar de nacimiento del alumno"/>				       		
+						       		<p:outputLabel for="fechaNacalumnoRes" value="Fecha de Nacimiento:"/>
+						       		<h:outputText id="fechaNacalumnoRes" value="#{SolicitudBean.solicitud.alumno.fechaDeNac}" label="Fecha de nacimiento del alumno">
+						       			<f:convertDateTime dateStyle="medium" type="date"  />
+						       		</h:outputText>
+						       		<p:outputLabel for="edadAluRes" value="Edad:"/>
+						       		<h:outputText id="edadAluRes" value="#{SolicitudBean.solicitud.alumno.edad}" label="Edad del alumno"/>				       		
+						       		<p:outputLabel for="domicilioalumnoRes" value="Domicilio:"/>
+						       		<h:outputText id="domicilioalumnoRes" value="#{SolicitudBean.solicitud.alumno.domicilio}" label="Domicilio del alumno"/>				       			
+						       		<p:outputLabel for="telalumnoRes" value="Teléfono:"/>
+						       		<h:outputText id="telalumnoRes" value="#{SolicitudBean.solicitud.alumno.telefono}" label="Teléfono del alumno"/>									
+						       		<h:outputText value="Familiares agregados:"/><br/>												
+									<p:dataList  id="familiaresAgregadosRes" value="#{SolicitudBean.familiares}" var="familiar" 
+												emptyMessage="No se han agregado familiares aún..." >
+										<h:panelGrid columns="2" cellpadding="8">
+											<h:outputLabel value="Parentesco:"/>
+											<h:outputText value="#{familiar.parentesco}"/>
+											<h:outputLabel value="Apellido y Nombre:"/>
+											<h:outputText value="#{familiar.apellido},#{familiar.nombre}"/>
+											<h:outputLabel value="DNI:"/>
+											<h:outputText value="#{familiar.dni}"/>
+											<h:outputLabel value="Teléfono:"/>
+											<h:outputText value="#{familiar.telefono}"/>
+											<h:outputLabel value="Domicilio:"/>
+											<h:outputText value="#{familiar.domicilio}"/>
+											<h:outputLabel value="Actividad:"/>
+											<h:outputText value="#{familiar.actividad}"/>										
+										</h:panelGrid>					        					        
+								    </p:dataList>				       		
+						       	</h:panelGrid>					       	
+						       	<h:panelGrid columns="2" cellpadding="2" >
+									<f:facet name="header">
+										<h:outputText value="3.1 Situación Previsional"/>
+									</f:facet>
+									<p:outputLabel for="obraSocialRes" value="Obra Social:"/>
+						       		<h:outputText id="obraSocialRes" value="#{SolicitudBean.solicitud.alumno.obraSocial}" label="Obra Social del alumno"/>					       		
+						       		<p:outputLabel for="nroAfiliadoOSRes" value="Nro. de Afiliado:"/>
+						       		<h:outputText id="nroAfiliadoOSRes" value="#{SolicitudBean.solicitud.alumno.nroAfiliadoOS}"  label="Nro. de Afiliado del alumno"/>					       		
+						       		<p:outputLabel for="poseeCuratelaRes" value="¿Posee Curatela?:"/>
+						       		<h:outputText id="poseeCuratelaRes" value="#{SolicitudBean.solicitud.alumno.poseeCuratela ? 'Si' : 'No'}"  label="Curatela del alumno"/>					       		
+						       		<p:outputLabel for="observacionesOSRes" value="Observaciones:"/>
+						       		<h:outputText id="observacionesOSRes" value="#{SolicitudBean.solicitud.alumno.observacionesOS}" label="Observaciones del alumno"/>					       						       		
+						       	</h:panelGrid>
+						       	<h:panelGrid columns="2" cellpadding="2" >
+									<f:facet name="header">
+										<h:outputText value="3.2 Situación Socio-económica"/>
+									</f:facet>
+									<p:outputLabel for="ingresosRes" value="Ingresos:"/>
+						       		<h:outputText id="ingresosRes" value="#{SolicitudBean.solicitud.alumno.ingresos}"  />					       		
+						       		<p:outputLabel for="viviendaRes" value="Vivienda:"/>
+						       		<h:outputText id="viviendaRes" value="#{SolicitudBean.solicitud.alumno.vivienda}"/>					       		
+						       		<p:outputLabel for="cantResponsablesRes" value="Cant. de Responsables:"/>
+						       		<h:outputText id="cantResponsablesRes" value="#{SolicitudBean.solicitud.alumno.cantResponsables}" />					       		
+						       		<p:outputLabel for="cantPersonasACargoRes" value="Cant. de Personas a Cargo del Responsable:"/>
+						       		<h:outputText id="cantPersonasACargoRes" value="#{SolicitudBean.solicitud.alumno.cantPersonasACargo}" />
+						       		<p:outputLabel for="poseeAutoRes" value="Las personas que conviven con el alumno, ¿poseen automóvil?:"/>					       		
+						       		<h:outputText id="poseeAutoRes" value="#{SolicitudBean.solicitud.alumno.poseeAuto ? 'Si' : 'No'}" />			       		
+						       	</h:panelGrid>
+						       	<h:panelGrid columns="2" cellpadding="2" >
+									<f:facet name="header">
+										<h:outputText value="4.1 Historia Escolar"/>
+									</f:facet>
+									<p:outputLabel for="escuelasRes" value="Escuelas a las que Asistió:"/>
+						       		<h:outputText id="escuelasRes" value="#{SolicitudBean.solicitud.alumno.escuelas}" />					       		
+						       		<p:outputLabel for="nivelEducativoRes" value="Nivel Educativo:"/>
+						       		<h:outputText id="nivelEducativoRes" value="#{SolicitudBean.solicitud.alumno.nivelEducativo}" />					       		
+						       	</h:panelGrid>
+						       	<h:panelGrid columns="2" cellpadding="5" >
+									<f:facet name="header">
+										<h:outputText value="4.2 Derivación a CEDICA"/>
+									</f:facet>
+									<p:outputLabel for="derivacionACEDICARes" value="¿Cómo llegó a CEDICA?:"/>					       		
+						       		<h:outputText id="derivacionACEDICARes" value="#{SolicitudBean.solicitud.alumno.derivacionACEDICA}" />					       						       		
+						       	</h:panelGrid>
+						       	<h:panelGrid columns="2" cellpadding="2" >
+									<f:facet name="header">
+										<h:outputText value="5. Historia Clínica"/>
+									</f:facet>
+									<p:outputLabel for="dificultadesRes" value="Dificultades:"/>
+						       		<h:outputText id="dificultadesRes" value="#{SolicitudBean.solicitud.alumno.dificultades}" />
+						       		<p:outputLabel for="patologiaRes" value="Patología:"/>
+						       		<h:outputText id="patologiaRes" value="#{SolicitudBean.solicitud.alumno.patologia}" />
+						       		<p:outputLabel for="habitosRes" value="Hábitos:"/>
+						       		<h:outputText id="habitosRes" value="#{SolicitudBean.solicitud.alumno.habitos}" />					       		
+						       		<p:outputLabel for="alimentacionRes" value="Alimentación:"/>
+						       		<h:outputText id="alimentacionRes" value="#{SolicitudBean.solicitud.alumno.alimentacion}"/>
+						       		<p:outputLabel for="poseeCertDiscRes" value="¿Posee Certificado de Discapacidad?:"/>
+						       		<h:outputText id="poseeCertDiscRes" value="#{SolicitudBean.solicitud.alumno.poseeCertDisc ? 'Si' : 'No'}" />
+						       		<p:outputLabel for="diagnosticoRes" value="¿Con qué diagnóstico?:"/>
+						       		<h:outputText id="diagnosticoRes" value="#{SolicitudBean.solicitud.alumno.diagnostico}" />
+						       		<p:outputLabel for="observacionesHCRes" value="Observaciones:"/>
+						       		<h:outputText id="observacionesHCRes" value="#{SolicitudBean.solicitud.alumno.observacionesHC}" />				       		
+						       	</h:panelGrid>
+						       	<h:panelGrid columns="2" cellpadding="2" >
+									<f:facet name="header">
+										<h:outputText value="6. Observaciones Adicionales"/>
+									</f:facet>
+									<p:outputLabel for="otraInfoRes" value="Otras observaciones:"/>
+						       		<h:outputText id="otraInfoRes" value="#{SolicitudBean.solicitud.alumno.otraInfo}" />
+						       		<p:outputLabel for="docPresentadaRes" value="Documentación Presentada:"/>
+						       		<h:outputText id="docPresentadaRes" value="#{SolicitudBean.solicitud.alumno.docPresentada}"/>						       						       		
+						       	</h:panelGrid>
+						       	<p:separator />						       	
+					            <p:commandButton value="Enviar Solicitud" actionListener="#{SolicitudBean.guardarSolicitud}"
+					                			oncomplete="handleRequest(xhr , status, args)" icon="ui-icon-circle-check"/>
+					            <p:commandButton value="Cancelar Solicitud" type="button" 
+					                			onclick="cancelarSolicitud()" icon="ui-icon-circle-close"/>					             
+						    </p:outputPanel>					       	
+					    </h:panelGrid>
+					</p:outputPanel>
+				</p:tab>
+			</p:wizard>
+		</h:form>
+		<p:dialog header="Agregar Institución" widgetVar="dialogoAgregarInstitucion" resizable="false" modal="true" rendered="#{sessionScope.institucionLogueada != null ? 'false' : 'true' }">
+			<h:form id="formNuevaInstitucion" >
+				<p:growl id="msgsNuevaInstitucion" sticky="true" showDetail="true" showSummary="false" />
+				<h:panelGrid columns="3" cellpadding="2" >
+		            <f:facet name="header">
+		            	<h:outputText value="Nueva Institución" />
+		            </f:facet>
+		            <p:outputLabel for="nombre" value="Nombre Institución:" />
+		            <p:inputText id="nombre" value="#{InstitucionBean.institucion.nombre}" required="true" label="Nombre Institución" />
+		            <p:message for="nombre" display="icon"/> 
+		            <p:outputLabel for="email" value="Email:" />
+		            <p:inputText id="email" value="#{InstitucionBean.institucion.email}"  label="Email" />
+		            <p:message for="email" display="icon"/>
+		            <p:outputLabel for="localidad" value="Localidad:" />
+		            <p:inputText id="localidad" value="#{InstitucionBean.institucion.localidad}"  label="Localidad" />
+		            <p:message for="localidad" display="icon"/>
+		            <p:outputLabel for="direccion" value="Dirección:" />
+		            <p:inputText id="direccion" value="#{InstitucionBean.institucion.direccion}"  label="Dirección" />
+		            <p:message for="direccion" display="icon"/>
+		            <p:outputLabel for="telefono" value="Teléfono:" />
+		            <p:inputText id="telefono" value="#{InstitucionBean.institucion.telefono}"  label="Teléfono" />
+		            <p:message for="telefono" display="icon"/>	
+		            <p:outputLabel for="director" value="Apellido y Nombre del Director:" />
+		            <p:inputText id="director" value="#{InstitucionBean.institucion.director}"  label="Director" />
+		            <p:message for="director" display="icon"/>            
+		            <p:outputLabel for="vacantes" value="Cant. de Vacantes:" />
+		            <p:inputText id="vacantes" value="#{InstitucionBean.institucion.vacantes}" required="true" label="Cant. de Vacantes"
+		            				validatorMessage="La Institución debe tener como mínimo una vacante" >
+		            	<f:validateLength minimum="1" />
+		            </p:inputText>
+		            <p:message for="vacantes" display="icon"/> 
+		            <p:outputLabel for="username" value="Nombre de Usuario:" />
+		            <p:inputText id="username" value="#{InstitucionBean.institucion.username}" required="true" label="Nombre de Usuario" />
+		            <p:message for="username" display="icon"/> 		 
+		            <p:outputLabel for="password1" value="Clave:" />
+		            <p:password id="password1" value="#{InstitucionBean.institucion.password}" match="password2" required="true" label="Clave" validatorMessage="Las claves deben coincidir." />
+		            <p:message for="password1" display="icon"/>
+		            <p:outputLabel for="password2" value="Repetir Clave:" />
+		            <p:password id="password2" value="#{InstitucionBean.institucion.password}" required="true" label="Repetir Clave" />
+		            <p:message for="password2" display="icon" />				        		 
+		            <f:facet name="footer" >
+		            	<p:separator />
+		                <p:commandButton value="Aceptar" update="msgsNuevaInstitucion formNuevaInstitucion" oncomplete="agregarInstitucionEnSolicitud(xhr, status, args);" actionListener="#{InstitucionBean.nueva_institucion}"
+		                                  process="@form" />
+		            </f:facet> 
+		        </h:panelGrid>
+			</h:form>	
+		</p:dialog>		
+	</ui:define>
+</ui:composition>

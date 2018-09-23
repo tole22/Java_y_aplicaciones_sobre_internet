@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+template="/WEB-INF/facelets/templates/defaultTemplate.xhtml">
+<ui:define name="titulo">
+CEDICA-ADMINISTRADOR
+</ui:define>
+<ui:define name="menu_header">
+<ui:include src="/WEB-INF/facelets/menues/menu_admin.xhtml" />
+</ui:define>
+<ui:define name="contenido">
+
+
+<h:form>
+<h:messages globalOnly="false" />
+<h:message for="usuarioInput" /><br></br>
+<h:message for="passInput" /><br></br>
+<h:message for="formularioNuevoUsuario" /><br></br>
+	<table border="1">
+                <tr>
+                    <th colspan="2">Nuevo Usuario</th>
+                </tr>
+                <tr>
+                    <td>Ingrese el Username:</td>
+                    <td><h:inputText id="usuarioInput" required="true" value="#{UsuarioBean.username}" >
+                    <f:validateLength maximum="15" minimum="3"></f:validateLength>
+                    </h:inputText>
+                    </td>
+					
+				</tr>
+                <tr>
+                    <td>Ingrese el Password:</td>
+                    <td><h:inputText id="passInput" required="true" value="#{UsuarioBean.password}">
+                    <f:validateLength maximum="15" minimum="3"></f:validateLength>
+                    </h:inputText>              
+					</td>
+					
+					
+				</tr>
+				<tr>
+                    <td>Seleccione el Rol:</td>
+                    <td>
+						 <h:selectOneListbox id="subscriptions" value="#{UsuarioBean.rol}" required="true">
+							        <f:selectItem id="item1" itemLabel="Administrador" itemValue="1" />
+							        <f:selectItem id="item2" itemLabel="Voluntario" itemValue="2" />
+							        <f:selectItem id="item3" itemLabel="Coordniador" itemValue="3" />
+							    </h:selectOneListbox>            
+					</td>
+					
+					
+				</tr>
+				<tr>
+				<td><h:commandButton value="Enviar" action="#{UsuarioBean.nuevo_usuario}"></h:commandButton></td>	
+				</tr>	
+		</table>		
+</h:form>
+
+</ui:define>
+
+</ui:composition>

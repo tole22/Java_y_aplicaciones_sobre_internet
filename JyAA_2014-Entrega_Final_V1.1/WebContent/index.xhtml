@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:h="http://java.sun.com/jsf/html"
+				template="/views/templates/defaultTemplate.xhtml">
+	<ui:define name="header">		
+		<ui:include src="/views/menu_principal.xhtml"></ui:include>			
+	</ui:define>	
+	<ui:define name="nav-left">		
+		<ui:include src="/views/nav-left.xhtml" />
+	</ui:define>
+	<ui:define name="body-content">	
+		<p:carousel numVisible="1" autoPlayInterval="5000" itemStyle="width: 780px;height: auto;"  circular="true"  effect="easeInStrong" >
+	        <p:tab titletip="TACAs">
+	            <h:panelGrid columns="2" cellpadding="10" width="10%">	            	
+		            <p:graphicImage library="imagenes" name="cedica_tacas.png" width="300"/>
+		            <p:outputLabel style="font-size: x-large !important;font-Style: italic;"><span style="color: peru;">TACAs:</span> La actividad que realizamos se denomina internacionalmente</p:outputLabel>			           		            
+		            <h:outputText
+	                    value="Terapia y Actividades Asistidas con
+ 		                    	Caballos y apunta a la recuperación de la persona en sus dimensiones biológica, psíquica y social." /> 		            	                            
+	            </h:panelGrid>
+	        </p:tab>
+	        <p:tab titletip="Nuestra Misión">
+	            <h:panelGrid columns="2" cellpadding="10" width="10%" >	              
+	                <p:graphicImage library="imagenes" name="cedica_mision.png" width="300" />
+	                 <p:outputLabel style="font-size: x-large !important;font-Style: italic;"><span style="color: peru;">Nuestra Misión:</span> CEDICA trabaja con la finalidad de IGUALAR OPORTUNIDADES en procura de</p:outputLabel>                
+ 	                <h:outputText
+	                    value="la reinserción familiar, el logro de la 
+	                    		escolaridad, la integración laboral y la mejora integral de la calidad de vida de sus alumn@s." />	                  	                
+	            </h:panelGrid>
+	        </p:tab>       	
+	    </p:carousel>	    
+	</ui:define>
+</ui:composition>
+	
+	
+		
+	

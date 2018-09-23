@@ -1,0 +1,75 @@
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<title>CEDICA - Administrador</title>
+		<LINK href="../css/style.css" rel="stylesheet" type="text/css">
+	</head>
+	<script type="text/javascript">
+		
+		function mostrarListado(){
+			
+			elem = document.getElementById("listado-caballos");
+			if(elem.style.display=="none")
+				elem.style.display="block";
+			
+		}
+		
+	</script>
+	<body>
+		<div class="header_index">
+<img alt="" src="../imagenes/cedica_header.png"><br>
+	<div class="menu_principal">
+		<ul class="menu">
+		    <li> <a href="../Close_Sesion" >Inicio</a></li>
+		    <li><a href="abm-usuarios.html">Usuarios</a></li>
+			<li><a href="abm-profesionales.html">Profesionales</a></li>
+			<li><a href="abm-voluntarios.html">Voluntarios</a></li>
+			<li><a href="abm-instituciones.html">Instituciones</a></li>
+			<li><a href="abm-caballos.html">Caballos</a></li>
+			<li> <a href="#" >Solicitudes</a>
+    			<ul>
+        	<li> <a href="nuevo_alu.html">Nueva Solicitud</a></li>
+           <li> <a href="listado_alu.html">Listado</a></li>
+        </ul> 
+    </li>
+			<li> <a href="#" >Lista de Espera</a>
+    			<ul>
+        		<li> <a href="agregar_lista.html">Agregar alumno</a></li>
+        		</ul> 
+    		</li>
+		    <li> <a href="../Close_Sesion" >Cerrar Sesión</a></li>
+		    	
+		</ul>
+		</div>
+	</div>
+	<br>
+	<div class="cuerpo_index">
+		<h1>---- CEDICA ----</h1>
+		<h2>Lista de Espera</h2>
+		<h3>Agregar alumno a la lista</h3>
+		<form action="#" method="POST" >
+		 Alumno: <select name="alumno" >
+		  <option value="">Seleccione</option>
+		  <option value="alu1">Maximiliano Toledo</option>
+		  <option value="alu2">Agustin Vazquez</option>
+		  <option value="alu3">Emiliano Moglia</option>
+		  <option value="alu4">Ariel Farkas</option>
+		</select><br>
+		Fecha Inscripción:<input type=date name=fecha_incripsion><br>
+		Fecha Ingreso:<input type=date name=fecha_ingreso><br>
+		 Sede: <select name="sede" >
+		  <option value="">Seleccione</option>
+		  <option value="">La Plata</option>
+		  <option value="">Lomas de zamora</option>
+		  <option value="">Capital Federa</option>
+		  <option value="">Corriente</option>
+		</select><br>
+		Obra Social:<input type=text name=os><br>
+		Observación:<br><textarea rows="5" cols="20"></textarea> <br>
+		  <input type="submit" value="Enviar">
+		</form>
+		
+		</div>
+</body>
+</html>

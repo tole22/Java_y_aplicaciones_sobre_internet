@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:h="http://java.sun.com/jsf/html"
+				template="/views/templates/defaultTemplate.xhtml">
+	<ui:define name="title">
+		<h:outputText value="CEDICA | ALUMNOS"/>
+	</ui:define>
+	<ui:define name="header">
+		<ui:include src="/views/menu_principal.xhtml"></ui:include>
+	</ui:define>
+	<ui:define name="nav-left">		
+		<ui:include src="/views/nav-left.xhtml" />
+	</ui:define>
+	<ui:define name="body-content">	
+		<section>
+			<hgroup>
+				<h1 class="pagetitle">Alumnos</h1>
+			</hgroup>
+		</section>
+		<section>
+			<p>Los alumnos y alumnas del CEDICA son, en gran medida, personas en situaciones de vulnerabilidad social, con distintos niveles de discapacidad física y/o mental, que pueden presentar patologías asociadas. La mayoría proviene de hogares carenciados, familias vulnerables, otras ONGs, Centros de Salud, Intitutos de Menores, Hospitales de Salud Mental, Hogares, Centros de Día, Hogares para Niños de la calle y Escuelas, entre otras instituciones.</p>
+			<p>Algunas personas sin este tipo de carencias son atendidas por CEDICA, dado que no hay en la ciudad de La Plata otra institución que pueda ofrecer esta actividad terapéutica.</p>				
+		</section>
+	</ui:define>
+</ui:composition>

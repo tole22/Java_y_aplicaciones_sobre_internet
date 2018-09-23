@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:p="http://primefaces.org/ui"
+				template="/views/templates/defaultTemplate.xhtml">
+	<ui:define name="title">
+		<h:outputText value="CEDICA | #{sessionScope.perfil}"/>
+	</ui:define>
+	<ui:define name="header">
+		<ui:include src="/views/#{sessionScope.perfil}/menu.xhtml" />		
+	</ui:define>
+	<ui:define name="nav-left">
+		<ui:include src="/views/#{sessionScope.perfil}/nav-left.xhtml"/>		
+	</ui:define>	
+	<ui:define name="body-content" >
+		<h:form id="formListadoSolicitudes">
+			<p:growl id="msgsListadoSolicitudes" sticky="true" showDetail="true"  />
+			<p:dataTable id="tablaSolicitudes" widgetVar="tablaSolicitudes" var="solicitud" value="#{SolicitudBean.listaEspera}" 
+						filteredValue="#{SolicitudBean.listaEsperaFiltrada}" style="margin-bottom:20px"
+						emptyMessage="No se encontraron solicitudes para el criterio solicitado." >
+		       <f:facet name="header">
+		          <h:outputText value="Lista de Espera"/> 
+		       </f:facet>	 
+		       <p:column headerText="Estado" >	            	       		
+		       		<h:outputText value="#{solicitud.estado}" />	           		           
+		       </p:column>
+		       <p:column headerText="Tipo" filterBy="#{solicitud.tipo}" filterMatchMode="exact">
+			       <f:facet name="filter">
+		                <p:selectOneMenu onchange="PF('tablaSolicitudes').filter()" >
+		                    <f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true" />
+		                    <f:selectItem itemLabel="Particular" itemValue="Particular" />
+		                    <f:selectItem itemLabel="Institución" itemValue="Institución" />		                    
+		                </p:selectOneMenu>
+		            </f:facet>		 		       		
+		       		<h:outputText value="#{solicitud.tipo}" />	           		           
+		       </p:column>	
+		       <p:column headerText="Aspirante" filterBy="#{solicitud.alumno.apellido}" filterMatchMode="contains">		          
+		             <h:outputText value="#{solicitud.alumno.apellido},#{solicitud.alumno.nombre}" />
+		             <p:commandButton  icon="ui-icon-search" title="Más Detalles"   
+							actionListener="#{AlumnoBean.resumenAlumno(solicitud.alumno)}" style="width:13px;height:13px;top:6px;background:none;border:none; margin-left: 4%;"
+										 >
+						<p:ajax event="dialogReturn" listener="#{AlumnoBean.resumenAlumnoListener}"  />
+					 </p:commandButton>
+		       </p:column>	       		 
+		       <p:column headerText="Fecha de Creación" filterBy="#{solicitud.fechaCreacion}" filterMatchMode="contains">		          
+		             <h:outputText value="#{solicitud.fechaCreacion}" ><f:convertDateTime dateStyle="medium" type="both" /></h:outputText>
+		       </p:column>
+		       <p:column headerText="Última Modificación" filterBy="#{solicitud.fechaUltimaMod}" filterMatchMode="contains">		          
+		             <h:outputText value="#{solicitud.fechaUltimaMod}" ><f:convertDateTime  dateStyle="medium" type="both" /></h:outputText>
+		       </p:column>			   		       		       
+		       <p:column style="width:10px;" >		       	   	
+		       		<p:commandButton  icon="ui-icon-pencil" title="Editar Solicitud"  update=":formListadoSolicitudes:msgsListadoSolicitudes" oncomplete="handleRequest(xhr , status, args)"
+										actionListener="#{SolicitudBean.editarSolicitud(solicitud)}" style="width:13px;height:13px;top:6px;background:none;border:none;" />		           		           
+		       </p:column>
+		       <p:column style="width:10px;" >		           		           
+	   		         	<p:commandButton  icon="ui-icon-circle-check" title="Aceptar Solicitud(incorporar al Aspirante como Alumno de CEDICA)"  update=":formListadoSolicitudes:msgsListadoSolicitudes" 
+	   		         					oncomplete="recargarPagina();" 
+										actionListener="#{SolicitudBean.incorporarAspirante(solicitud)}" style="width:13px;height:13px;top:6px;background:none;border:none;" />
+				</p:column>
+		       <p:column  style="width:10px;padding-bottom: 0;padding-top: 0;">		           
+		           <p:commandButton  icon="ui-icon-circle-close" title="Rechazar Solicitud"  
+										actionListener="#{SolicitudBean.borrarSolicitud(solicitud)}" style="width:13px;height:13px;top:6px;background:none;border:none;" >
+							<p:ajax event="dialogReturn" listener="#{SolicitudBean.darBajaListener}"  update=":formListadoSolicitudes:msgsListadoSolicitudes" oncomplete="recargarPagina();" />
+						</p:commandButton>							           
+		       </p:column>		       		        
+		   </p:dataTable>		   
+		</h:form>		
+	</ui:define>
+</ui:composition>

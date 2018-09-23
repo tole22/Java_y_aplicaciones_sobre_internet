@@ -1,0 +1,49 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml" 
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:f="http://java.sun.com/jsf/core">	 
+   	<h6 align="right" style="margin: 0;color:peru;">Usted no ha iniciado una sesión...</h6>
+   	<p:growl id="messages" showDetail="true" life="3000" /> 
+    <p:menubar>	        
+        <p:menuitem value="Inicio" url="/views/index.xhtml" icon="ui-icon-home"/>				           
+        <p:submenu label="Acerca De" icon="ui-icon-help">
+            <p:menuitem value="Presentación" url="/views/acerca_de/presentacion.xhtml" />	          
+            <p:menuitem value="Actividad" url="/views/acerca_de/actividad.xhtml" />	                
+            <p:menuitem value="Sedes" url="/views/acerca_de/sedes.xhtml" />
+            <p:menuitem value="Misión" url="/views/acerca_de/mision.xhtml" />
+            <p:menuitem value="Equipo" url="/views/acerca_de/equipo.xhtml" />
+            <p:menuitem value="Beneficiarios" url="/views/acerca_de/beneficiarios.xhtml" />	            
+        </p:submenu>
+        <p:menuitem value="Alumnos" url="/views/acerca_de/alumnos_intro.xhtml" icon="ui-icon-person"/>
+        <p:submenu label="Capacitación" icon="ui-icon-tag">
+        	<p:menuitem value="Curso TACAs" url="/views/cursos/curso_tacas.xhtml" />		
+        </p:submenu>
+        <p:menuitem value="Contacto" url="/views/contacto/contacto.xhtml" icon="ui-icon-contact"/> 
+        <f:facet name="options">        	
+            <p:inputText style="margin-right:10px;" placeholder="Buscar"/>            
+            <p:commandButton id="botonLogin" type="button" value="Ingresar" icon="ui-icon-extlink" 
+            				onclick="PF('dialogoLogin').show();"/>
+        </f:facet>	        	 		
+    </p:menubar>    
+    <p:dialog header="Login" widgetVar="dialogoLogin" resizable="false" modal="true" >
+    	<h:form>
+    		<p:growl id="growlLogin" sticky="true" showDetail="true"  />
+	        <h:panelGrid columns="2" cellpadding="5">	        
+	            <p:outputLabel for="username" value="Usuario:" />
+	            <p:inputText id="username" value="#{LoginBean.username}" required="true" label="Usuario" title="Usuarios de Sistema(user/pass) -> Administrador: admin/admin ; Voluntario: volunt/volunt ; Profesional: prof/prof ; Institucion: insti/insti."/>
+	            <p:outputLabel for="password" value="Clave:" />
+	            <p:password id="password" value="#{LoginBean.password}" required="true" label="Clave" /> 
+	            <f:facet name="footer">
+	                <p:commandButton value="Login" update="growlLogin" actionListener="#{LoginBean.login}"
+	                                 oncomplete="handleLoginRequest(xhr, status, args)"  />
+	                <p:separator />
+	                <p:commandLink  value="Ingresar como Institución..." update="growlLogin" actionListener="#{LoginBean.loginInstitucion}" 
+	                				oncomplete="handleLoginRequest(xhr, status, args)"
+	                				title="Ingrese el usuario y clave correspondiente y presione aquí para ingresar al sistema como Usuario Institución."/>	                
+	            </f:facet> 
+	            <p:tooltip for="username" trackMouse="true"/>
+	        </h:panelGrid>
+	    </h:form>
+    </p:dialog>						
+</ui:composition>

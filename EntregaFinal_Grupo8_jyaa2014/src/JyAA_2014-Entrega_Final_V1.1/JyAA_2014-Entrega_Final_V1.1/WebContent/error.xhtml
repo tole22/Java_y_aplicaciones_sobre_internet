@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:h="http://java.sun.com/jsf/html"
+				template="/views/templates/defaultTemplate.xhtml">	
+	<ui:define name="body-content">	
+		<p:panel>
+			<h1>Oops! Ha ocurrido un error...</h1>
+			<p:link value="Página Principal"  href="/#{sessionScope.perfil != null ? 'views/' : ''}#{sessionScope.perfil}#{sessionScope.perfil != null ? '/' : ''}"/>		
+		</p:panel>    
+	</ui:define>
+</ui:composition>
+	
+	
+		
+	

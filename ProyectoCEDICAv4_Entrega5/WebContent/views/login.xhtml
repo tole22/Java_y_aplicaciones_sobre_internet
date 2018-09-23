@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+template="/WEB-INF/facelets/templates/defaultTemplate.xhtml">
+<ui:define name="titulo">
+CEDICA-LOGIN
+</ui:define>
+<ui:define name="menu_header">
+<ui:include src="/WEB-INF/facelets/menues/menu_principal.xhtml"></ui:include>
+</ui:define>
+<ui:define name="contenido">
+
+ 
+<h:form>
+<h:messages globalOnly="false" />
+
+<h:message for="loginForm" />
+	<table border="1">
+                <tr>
+                    <th colspan="2">Ingresar</th>
+                </tr>
+                <tr>
+                    <td>Ingrese su Usuario:</td>
+                    <td><h:inputText id="usuarioInput" required="true" value="#{LoginBean.username}" >
+                    <f:validateLength maximum="15" minimum="3"></f:validateLength>
+                    </h:inputText>
+                    </td>
+					
+				</tr>
+                <tr>
+                    <td>Ingrese su Contraseña:</td>
+                    <td><h:inputText id="passInput" required="true" value="#{LoginBean.password}">
+                    <f:validateLength maximum="15" minimum="3"></f:validateLength>
+                    </h:inputText>              
+					</td>
+					
+					
+				</tr>
+				<tr>
+				<td><h:commandButton value="Enviar" action="#{LoginBean.login}"></h:commandButton></td>	
+				</tr>	
+		</table>		
+</h:form>
+
+        <h2>USUARIOS</h2>
+        <h3>ADMINISTRADOR= user:admin pass:admin</h3>
+        <h3>VOLUNTARIO= user:volunt pass:volunt</h3>
+        <h3>COORDINADOR= user:coord pass:coord</h3>
+</ui:define>
+
+</ui:composition>

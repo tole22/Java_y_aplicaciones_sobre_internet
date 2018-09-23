@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>Registrar persona</title>
+	<link rel="stylesheet" type="text/css" href="../css/celiacos.css" ></link> 
+</h:head>
+<h:body>
+<div>
+	<h3>Celíacos</h3>
+
+	<h1>Ingrese los datos de la persona :</h1>
+		<h:form>	
+		<label> 
+			<span>Apellido</span>
+			<h:inputText  id="apellidoInput" required="true" value="#{registrarBean.apellido}" >
+				<f:validator  validatorId="validadorNombreApellido" />
+				
+			</h:inputText>
+			<span style="color: red;"><b>
+					
+					<h:message  for="apellidoInput" />
+				 </b>
+				 <br/>
+				 </span>
+		</label>
+
+		<label> 
+			<span>Nombre</span>
+				<h:inputText id="nombreInput" required="true"  value="#{registrarBean.nombre}" >
+				<f:validator  validatorId="validadorNombreApellido" />
+				</h:inputText>
+				<span style="color: red;"><b>
+					
+					<h:message  for="nombreInput" />
+				 </b>
+				 <br/>
+				 </span>
+		</label> 
+
+		<label> 
+			<span>Fecha de nacimiento</span>
+				<h:inputText id="fechaNacimientoInput" value="#{registrarBean.fechaNacimiento}" >
+				<f:convertDateTime pattern="dd/mm/yyyy" />
+				</h:inputText>
+				<span style="color: red;"><b>
+					<h:message for="fechaNacimientoInput"  />
+					 </b>
+					 <br/>
+			 </span>
+			
+		</label>
+		<label> <span>Dirección Email</span>
+					<h:inputText id="emailInput" value="#{registrarBean.email}" >
+					<f:validateRegex pattern="^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$" />
+					</h:inputText>
+					<span style="color: red;"><b>
+						<h:message for="emailInput"
+						showDetail="true" />
+						</b>
+						<br/>
+					</span>
+		 </label>
+
+	<label> 
+	<span>
+			 <h:commandButton value="Guardar"  action="#{registrarBean.registrar()}"></h:commandButton>
+			 </span>
+	 </label>
+
+
+	
+	
+		
+	</h:form>
+	</div>
+</h:body>
+</html>

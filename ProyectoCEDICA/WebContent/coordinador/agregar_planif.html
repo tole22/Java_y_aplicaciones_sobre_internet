@@ -1,0 +1,88 @@
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<title>CEDICA - Coordinador</title>
+		<LINK href="../css/style.css" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+	<div class="header_index">
+<img alt="" src="../imagenes/cedica_header.png"><br>
+	<div class="menu_principal">
+<ul class="menu">
+    <li> <a href="../Close_Sesion" >Inicio</a></li>
+    <li> <a href="#" >Alumnos</a>
+    <ul>
+        	<li> <a href="nuevo_alu.html">Nuevo Alumno</a></li>
+           <li> <a href="listado_alu.html">Listado</a></li>
+        </ul> 
+    </li>
+    <li> <a href="#" >Legajos</a>
+    <ul>
+        	<li> <a href="legajo_alu_inst.html">Institucion</a></li>
+           <li> <a href="legajo_alu_familia.html">Familiares</a></li>
+        </ul> 
+    </li>
+    <li> <a href="lista_de_espera.html" >Lista de Espera</a></li>
+    <li> <a href="#" >Planificación</a>
+    	<ul>
+        	<li> <a href="agregar_planif.html">Agregar</a></li>
+        </ul> 
+    </li>
+    <li> <a href="../Close_Sesion" >Cerrar Sesión</a></li>
+    
+</ul>
+</div>
+</div>
+<br>
+	<div class="cuerpo_index">
+		<img alt="CEDICA" src="../imagenes/CEDICA.png" width="25%">	
+		<h1>---- CEDICA ----</h1>
+		<h2>Nueva Planificacion</h2>
+		<form action="#" method="POST" >
+		 Alumno: <select name="alumno" >
+		  <option value="">Seleccione</option>
+		  <option value="alu1">Maximiliano Toledo</option>
+		  <option value="alu2">Agustin Vazquez</option>
+		  <option value="alu3">Emiliano Moglia</option>
+		  <option value="alu4">Ariel Farkas</option>
+		</select><br>
+		Fecha y Hora:<input type="datetime-local" name=fecha_hora><br>
+		 Sede: <select name="sede" >
+		  <option value="">Seleccione</option>
+		  <option value="">La Plata</option>
+		  <option value="">Lomas de zamora</option>
+		  <option value="">Capital Federa</option>
+		  <option value="">Corriente</option>
+		</select><br>
+		Coordinador: <select name="alumno" >
+		  <option value="">Seleccione</option>
+		  <option value="alu1">Maximiliano </option>
+		  <option value="alu2">Agustin</option>
+		  <option value="alu3">Emiliano</option>
+		  <option value="alu4">Ariel </option>
+		</select><br>
+		Caballo: <select name="alumno" >
+		  <option value="">Seleccione</option>
+		  <option value="alu1">Esmeralda</option>
+		  <option value="alu2">Tordillo</option>
+		  <option value="alu3">Cimarron</option>
+		</select><br>
+		Conductor: <select name="alumno" >
+		  <option value="">Seleccione</option>
+		  <option value="alu1">Julio</option>
+		  <option value="alu2">Julian</option>
+		  <option value="alu3">Adrian</option>
+		</select><br>
+		Voluntario: <select name="alumno" >
+		  <option value="">Seleccione</option>
+		  <option value="alu1">Julio</option>
+		  <option value="alu2">Hernesto</option>
+		  <option value="alu3">Sergio</option>
+		</select><br>
+		
+		  <input type="submit" value="Enviar">
+		</form>
+		</div>
+	</body>
+</html>

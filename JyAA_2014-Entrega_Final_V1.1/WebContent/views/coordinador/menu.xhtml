@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:f="http://java.sun.com/jsf/core">	
+	<h6 align="right" style="margin: 0;color:peru;">Usted ha iniciado sesión como '#{LoginBean.username}'...</h6> 
+   	<p:growl id="global_messages"/> 
+    <p:menubar>	        
+        <p:menuitem value="Inicio" url="/views/coordinador/index.xhtml" icon="ui-icon-home"/>				           
+        <p:submenu label="Lista de Espera" icon="ui-icon-person">
+            <p:menuitem value="Planificación" url="#" />	          
+            <p:menuitem value="Listado" url="#" />	           	            
+        </p:submenu>
+        <p:submenu label="Legajos" icon="ui-icon-tag">
+            <p:menuitem value="Ingreso Familia" url="#" />
+             <p:menuitem value="Ingreso Inst." url="#" />	          
+            <p:menuitem value="Listado" url="#" />	           	            
+        </p:submenu>
+        <f:facet name="options">        
+            <p:inputText style="margin-right:10px" placeholder="Buscar"/>           	
+           	<p:commandButton id="botonLogout" type="button" value="Cerrar Sesión" icon="ui-icon-extlink" 
+           					onclick="PF('dialogoLogout').show();"/>            
+        </f:facet>	        	 		
+    </p:menubar>
+    <h:form id="loginForm">
+	    <p:growl id="session_messages"/>
+	    <p:dialog header="Logout" widgetVar="dialogoLogout" resizable="false" modal="true" >
+	        <h:panelGrid columns="2" cellpadding="5">
+	        	<p:outputLabel>¿Está seguro que desea cerrar la sesión?</p:outputLabel>
+	            <f:facet name="footer">
+	                <p:commandButton value="Cerrar Sesión" update="session_messages" actionListener="#{LoginBean.logout}"
+	                                 oncomplete="logout(xhr, status, args)" />
+	                <p:commandButton value="Cancelar" type="button" onclick="PF('dialogoLogout').hide();" />
+	            </f:facet> 
+	        </h:panelGrid>
+	    </p:dialog>	   
+	</h:form>
+</ui:composition>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:h="http://java.sun.com/jsf/html"
+				template="/views/templates/defaultTemplate.xhtml">
+	<ui:define name="header">		
+		<ui:include src="/views/menu_principal.xhtml"></ui:include>			
+	</ui:define>	
+	<ui:define name="nav-left">		
+		<ui:include src="/views/nav-left.xhtml" />
+	</ui:define>
+	<ui:define name="body-content">	
+		<p:carousel numVisible="1" autoPlayInterval="13000" itemStyle="width: 3%;height: auto;border:none;"  circular="true"  effect="fade" effectDuration="1700"  style="border:none;box-shadow:1px;">	        
+	        <p:tab titletip="Nuestra Misión">
+	            <div>	
+	            	<p:graphicImage library="imagenes" name="cedica_carousel_mision.png" style="box-shadow: 5px 5px 5px #888888;width:99%;"/>   
+	            </div>
+	        </p:tab>       	
+	        <p:tab titletip="TACAs">            	            	
+				<div>					
+					<p:graphicImage library="imagenes" name="cedica_carousel_tacas.png" style="box-shadow: 5px 5px 5px #888888;width:99%;"/>
+		        </div>	        
+	        </p:tab>
+	    </p:carousel>	    
+	</ui:define>
+</ui:composition>
+	
+	
+		
+	

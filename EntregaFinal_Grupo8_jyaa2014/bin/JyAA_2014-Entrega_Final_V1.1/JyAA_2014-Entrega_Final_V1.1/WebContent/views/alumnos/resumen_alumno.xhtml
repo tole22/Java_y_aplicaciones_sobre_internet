@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://java.sun.com/jsf/core">     
+    <h:head>
+        <title>#{AlumnoBean.alumno.apellido},#{AlumnoBean.alumno.nombre}</title>
+                <style type="text/css">
+            .ui-widget {
+                font-size: 90%;
+            }
+        </style>
+    </h:head>
+     
+    <h:body>
+        <h:form>
+        	<p:outputPanel>															        
+				<h:panelGrid columns="2" cellpadding="5" >
+		       		<h:outputLabel value="Fecha de Ingreso a CEDICA:" style="font-style:italic;font-weight: bold;font-size:medium;color: #4f4f4f;"/>
+		       		<h:outputText value="#{AlumnoBean.alumno.estado != 'Aceptado' ? 'Aún no ha sido incorporado como alumno...' : AlumnoBean.alumno.fechaDeIngreso}" />
+		       		<h:outputLabel  value="DNI:" style="font-style:italic;font-weight: bold;font-size:medium;color: #4f4f4f;"/>
+		       		<h:outputText value="#{AlumnoBean.alumno.dni}" />	       		
+		       		<h:outputLabel value="Sexo:" style="font-style:italic;font-weight: bold;font-size:medium;color: #4f4f4f;"/>
+		       		<h:outputText value="#{AlumnoBean.alumno.sexo}" />	       		
+		       		<h:outputLabel value="Lugar de Nacimiento:" style="font-style:italic;font-weight: bold;font-size:medium;color: #4f4f4f;"/>
+		       		<h:outputText value="#{AlumnoBean.alumno.lugarDeNac}" />
+		       		<h:outputLabel value="Fecha de Nacimiento:" style="font-style:italic;font-weight: bold;font-size:medium;color: #4f4f4f;"/>
+		       		<h:outputText id="fechaNacalumno" value="#{AlumnoBean.alumno.fechaDeNac}">
+		       			<f:convertDateTime for="fechaNacalumno" dateStyle="medium" type="date"  />
+		       		</h:outputText> 
+		       		<h:outputLabel value="Edad:" style="font-style:italic;font-weight: bold;font-size:medium;color: #4f4f4f;"/>
+		       		<h:outputText value="#{AlumnoBean.alumno.edad}" />
+		       		<h:outputLabel value="Teléfono:" style="font-style:italic;font-weight: bold;font-size:medium;color: #4f4f4f;"/>
+		       		<h:outputText value="#{AlumnoBean.alumno.telefono}"/>	       		
+		       		<h:outputLabel value="Diagnóstico:" style="font-style:italic;font-weight: bold;font-size:medium;color: #4f4f4f;"/>
+				    <h:outputText value="#{AlumnoBean.alumno.diagnostico}" />
+				    <h:outputLabel value="Patología:" style="font-style:italic;font-weight: bold;font-size:medium;color: #4f4f4f;"/>
+				    <h:outputText value="#{AlumnoBean.alumno.patologia}" />	
+				    <h:outputLabel value="Observaciones:" style="font-style:italic;font-weight: bold;font-size:medium;color: #4f4f4f;"/>
+				    <h:outputText value="#{AlumnoBean.alumno.observaciones}. #{AlumnoBean.alumno.observacionesHC}. #{AlumnoBean.alumno.otraInfo}" />
+				    <h:outputLabel value="Documentación Presentada:" style="font-style:italic;font-weight: bold;font-size:medium;color: #4f4f4f;"/>
+					<h:outputText id="docPresentadaRes" value="#{AlumnoBean.alumno.docPresentada}"/>				    			            
+		        </h:panelGrid>		        
+		        <p:separator />
+	       		<p:commandButton icon="ui-icon-arrowreturnthick-1-w" title="Volver" actionListener="#{AlumnoBean.volverDeResumenAlumno}" />
+		    </p:outputPanel>
+		</h:form>
+    </h:body>     
+</html>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+	http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+	version="1.0">
+	<persistence-unit name="jyaa_2014">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<class>com.CEDICA.model.Usuario</class>
+		<class>com.CEDICA.model.Rol</class>
+		<!-- <class>com.CEDICA.model.Persona</class>		
+		<class>com.CEDICA.model.Alumno</class>
+		<class>com.CEDICA.model.Aspirante</class>
+		<class>com.CEDICA.model.Familiar</class>
+		<class>com.CEDICA.model.Profesional_Interno</class>	
+		<class>com.CEDICA.model.Profesional_Externo</class>
+		<class>com.CEDICA.model.Voluntario</class>
+		<class>com.CEDICA.model.Grilla</class>
+		<class>com.CEDICA.model.Rol_En_Clase</class>
+		<class>com.CEDICA.model.Conductor</class>
+		<class>com.CEDICA.model.Acompanante</class>
+		<class>com.CEDICA.model.Coordinador</class>
+		<class>com.CEDICA.model.Sede</class>
+		<class>com.CEDICA.model.Reserva</class>
+		<class>com.CEDICA.model.Solicitud</class>
+		<class>com.CEDICA.model.Estado_Solicitud</class>
+		<class>com.CEDICA.model.Solicitud_En_Admision</class>
+		<class>com.CEDICA.model.Solicitud_En_Autorizacion</class>
+		<class>com.CEDICA.model.Solicitud_En_Espera</class>
+		<class>com.CEDICA.model.Solicitud_En_Evaluacion</class>
+		<class>com.CEDICA.model.Turno</class>
+		<class>com.CEDICA.model.Legajo</class>
+		<class>com.CEDICA.model.Institucion</class>
+		<class>com.CEDICA.model.Clase</class>
+		<class>com.CEDICA.model.Clase_Individual</class>
+		<class>com.CEDICA.model.Clase_Taller</class>
+		<class>com.CEDICA.model.Caballo</class>
+		<class>com.CEDICA.model.Cronica_Alumno</class>
+		<class>com.CEDICA.model.Cronica_Dia</class>
+		<class>com.CEDICA.model.Cronica_Profesional</class>	
+		-->			
+		<properties>
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.connection.username" value="root" />
+			<property name="hibernate.connection.password" value="root"/>
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/jyaa2014_grupo8"/>		
+			<!-- <property name="hibernate.default_schema" value="stock" /> -->
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+			<property name="hibernate.hbm2ddl.auto" value="create"/> 
+		</properties>
+	</persistence-unit>
+</persistence>

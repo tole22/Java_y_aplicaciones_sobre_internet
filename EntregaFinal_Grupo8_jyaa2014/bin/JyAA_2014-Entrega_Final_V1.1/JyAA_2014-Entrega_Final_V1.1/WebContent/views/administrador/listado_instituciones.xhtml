@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:p="http://primefaces.org/ui"
+				template="/views/templates/defaultTemplate.xhtml">
+	<ui:define name="title">
+		<h:outputText value="CEDICA | ADMINISTRADOR"/>
+	</ui:define>
+	<ui:define name="header">
+		<ui:include src="/views/administrador/menu.xhtml" />		
+	</ui:define>	
+	<ui:define name="nav-left">
+		<ui:include src="/views/administrador/nav-left.xhtml"/>		
+	</ui:define>
+	<ui:define name="body-content" >
+		<h:form id="formListadoInstituciones">
+			<p:growl id="msgsListadoInstituciones" sticky="true" showDetail="true"   />
+			<p:dataTable id="tablaInstituciones" widgetVar="tablaInstituciones" var="institucion" value="#{InstitucionBean.lista}" 
+						filteredValue="#{InstitucionBean.listaFiltrada}" editable="true" style="margin-bottom:20px"
+						emptyMessage="No se encontraron Instituciones para el criterio solicitado.">
+		       <f:facet name="header">
+		          <h:outputText value="Listado de Instituciones"/> 
+		       </f:facet>
+		 
+		       <p:ajax event="rowEdit" listener="#{InstitucionBean.onRowEdit}" update=":formListadoInstituciones:msgsListadoInstituciones" />
+		       <p:ajax event="rowEditCancel" listener="#{InstitucionBean.onRowCancel}" update=":formListadoInstituciones:msgsListadoInstituciones" />
+		 
+		       <p:column headerText="Nombre" filterBy="#{institucion.nombre}" filterMatchMode="contains">
+		       		<p:cellEditor>
+		               <f:facet name="output"><h:outputText value="#{institucion.nombre}" /></f:facet>
+		               <f:facet name="input"><p:inputText value="#{institucion.nombre}" style="width:100%" label="Nombre Institucion" required="true"/></f:facet>
+		           </p:cellEditor>		           
+		       </p:column>
+		       
+		       <p:column headerText="Email" >
+		       		<p:cellEditor>
+		               <f:facet name="output"><h:outputText value="#{institucion.email}" /></f:facet>
+		               <f:facet name="input"><p:inputText value="#{institucion.email}" style="width:100%" label="Email Institucion" /></f:facet>
+		           </p:cellEditor>		           
+		       </p:column>
+		       <p:column headerText="Localidad" filterBy="#{institucion.localidad}" filterMatchMode="contains">
+		       		<p:cellEditor>
+		               <f:facet name="output"><h:outputText value="#{institucion.localidad}" /></f:facet>
+		               <f:facet name="input"><p:inputText value="#{institucion.localidad}" style="width:100%" label="Localidad Institucion" /></f:facet>
+		           </p:cellEditor>		           
+		       </p:column>
+		       <p:column headerText="Dirección" >
+		       		<p:cellEditor>
+		               <f:facet name="output"><h:outputText value="#{institucion.direccion}" /></f:facet>
+		               <f:facet name="input"><p:inputText value="#{institucion.direccion}" style="width:100%" label="Direccion Institucion" /></f:facet>
+		           </p:cellEditor>		           
+		       </p:column>
+		       <p:column headerText="Teléfono" >
+		       		<p:cellEditor>
+		               <f:facet name="output"><h:outputText value="#{institucion.telefono}" /></f:facet>
+		               <f:facet name="input"><p:inputText value="#{institucion.telefono}" style="width:100%" label="Telefono Institucion" /></f:facet>
+		           </p:cellEditor>		           
+		       </p:column>	
+		       <p:column headerText="Director" >
+		       		<p:cellEditor>
+		               <f:facet name="output"><h:outputText value="#{institucion.director}" /></f:facet>
+		               <f:facet name="input"><p:inputText value="#{institucion.director}" style="width:100%" label="Director Institucion" /></f:facet>
+		           </p:cellEditor>		           
+		       </p:column>	       
+		       <p:column headerText="Vacantes" >
+		       		<p:cellEditor>
+		               <f:facet name="output"><h:outputText value="#{institucion.vacantes}" /></f:facet>
+		               <f:facet name="input"><p:inputText value="#{institucion.vacantes}" style="width:100%" label="Vacantes Institucion" required="true"/></f:facet>
+		           </p:cellEditor>		           
+		       </p:column>
+		       
+		       <p:column headerText="Usuario" filterBy="#{institucion.username}" filterMatchMode="contains">
+		       		<p:cellEditor>
+		               <f:facet name="output"><h:outputText value="#{institucion.username}" /></f:facet>
+		               <f:facet name="input"><p:inputText value="#{institucion.username}" style="width:100%" label="Nombre Usuario Institucion" disabled="true" /></f:facet>
+		           </p:cellEditor>		           
+		       </p:column>
+		       		 
+		       <p:column headerText="Clave">
+		           <p:cellEditor>
+		               <f:facet name="output"><h:outputText value="#{institucion.password}" /></f:facet>
+		               <f:facet name="input"><p:inputText value="#{institucion.password}" style="width:100%" label="Clave" required="true"/></f:facet>
+		           </p:cellEditor>
+		       </p:column>
+		 
+		       
+		       <p:column style="width:10px;" >		       	   	
+		           <p:rowEditor />		           		           
+		       </p:column>
+		       <p:column  style="width:10px;padding-bottom: 0;padding-top: 0;">		           
+		           <p:commandButton  icon="ui-icon-trash" title="Borrar Institución" update=":formListadoInstituciones:msgsListadoInstituciones" oncomplete="recargarPagina();"
+										actionListener="#{InstitucionBean.borrar_institucion(institucion)}" style="width:13px;height:13px;top:6px;background:none;border:none;" />							           
+		       </p:column>		       		        
+		   </p:dataTable>		   
+		</h:form>		
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:ui= "http://java.sun.com/jsf/facelets">
+<body>
+<div class="menu_principal">
+		<ul class="menu">
+		    <li> <a href="#" >Inicio</a></li>
+		    <li><a href="#">Usuarios</a>
+		    <ul>
+        	<li><h:link value="Nuevo Usuario" outcome="nuevo_usuario.xhtml" ></h:link></li>
+        	<li><h:link value="Borrar Usuario" outcome="borrar_usuario.xhtml" ></h:link></li>
+        	<li><h:link value="Modificar" outcome="modificar_usuario.xhtml" ></h:link></li>
+           	<li><h:link value="Listado" outcome="listado_usuarios.xhtml" ></h:link></li>
+        	</ul> 
+        	</li>
+			<li><a href="#">Profesionales</a></li>
+			<li><a href="#">Voluntarios</a></li>
+			<li><a href="#">Instituciones</a></li>
+			<li><a href="#">Caballos</a></li>
+			<li> <a href="#" >Solicitudes</a>
+    		<ul>
+        	<li> <a href="#">Nueva Solicitud</a></li>
+           	<li> <a href="#">Listado</a></li>
+        	</ul> 
+    		</li>
+			<li> <a href="#" >Lista de Espera</a>
+    			<ul>
+        		<li> <a href="#">Agregar alumno</a></li>
+        		</ul> 
+    		</li>
+		    <li><h:link value="Cerrar Sesion" outcome="/views/login.xhtml" ></h:link></li>
+		    	
+		</ul>
+		</div>
+		</body>
+		</html>

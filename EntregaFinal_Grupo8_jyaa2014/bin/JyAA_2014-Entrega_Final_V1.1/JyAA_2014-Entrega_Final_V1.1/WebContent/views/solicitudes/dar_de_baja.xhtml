@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://java.sun.com/jsf/core">     
+    <h:head>
+        <title>Rechazar Solicitud de "#{SolicitudBean.solicitud.alumno.nombre} #{SolicitudBean.solicitud.alumno.apellido}"</title>
+                <style type="text/css">
+            .ui-widget {
+                font-size: 90%;
+            }
+        </style>
+    </h:head>
+     
+    <h:body>
+        <h:form>
+        	<p:outputPanel>        															        
+				<h:panelGrid columns="1" >
+		       		<h:outputLabel value="Motivo de la baja:" style="font-style:italic;font-weight: bold;font-size:medium;color: #4f4f4f;"/>
+		       		<h:inputTextarea value="#{SolicitudBean.solicitud.motivoDeBaja}" rows="8" cols="60"/>
+		       		<p:separator />
+		    	   	<p:commandButton icon="ui-icon-circle-check" title="Rechazar Solicitud" value="Rechazar" actionListener="#{SolicitudBean.enviarSolicitudBaja}" />		    
+		       	</h:panelGrid>
+		    </p:outputPanel>
+		</h:form>
+    </h:body>     
+</html>

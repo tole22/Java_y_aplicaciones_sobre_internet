@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html 	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui= "http://java.sun.com/jsf/facelets"		
+		xmlns:p="http://primefaces.org/ui"
+		>
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
+		<title>
+			<ui:insert name="title">
+				<h:outputText value="CEDICA | "/>
+			</ui:insert>
+		</title>
+		<style type="text/css">
+			#center-content p,ul,li{
+				text-align: left;
+			}			
+			.pagetitle{
+				color: #60afdd;
+			}
+			.ui-layout-container{
+				/*width: 99% !important;*/
+				margin-left: 9% !important;
+				margin-right: 9% !important;
+			}
+			
+			.ui-layout-unit{
+				border: none;
+			}
+			
+            .ui-layout-north {
+               	z-index:20 !important; 
+                overflow:visible !important;
+                position:static !important;
+            }
+
+            .ui-layout-north .ui-layout-unit-content {
+                overflow:visible !important;
+            }
+            
+            .ui-layout-south .ui-layout-unit-content{
+            	background-color: dodgerblue;
+            	text-align: center;            	
+            }
+            .ui-layout-south {
+            	background-color: dodgerblue;            	
+            }
+            .ui-column-filter{
+            	width: 25% !important;
+            	height: 16.5px;
+            	font-size: smaller !important;
+            }
+            
+            .ui-wizard-step-title{            	
+             	background: none repeat scroll 0 0 rgba(0, 0, 0, 0) !important; 
+             	opacity: 0.8;
+             	color: skyblue !important;             	
+             	font-style:oblique !important;            	
+    			border-top-style: none !important;
+    			border-bottom-style: none !important;
+    			border-left-style: none !important;
+    			border-right-style: none !important;   					
+            }
+        </style>		
+	</h:head>
+	<h:body>
+		<p:layout fullPage="false" >	
+			<p:layoutUnit id="top" position="north" size="250">
+		 		<h:graphicImage library="imagenes" name="cedica_header.png" width="100%" ></h:graphicImage>
+		 		<ui:insert name="header">
+				</ui:insert>	
+		 	</p:layoutUnit>		 		 			 		
+<!-- 			<p:layoutUnit id="bottom" position="south" size="60" > -->
+<!-- 				<ui:insert name="footer">				 -->
+<!-- 				</ui:insert> -->
+<!-- 				<h:outputLabel>CEDICA</h:outputLabel> -->
+<!-- 			</p:layoutUnit>  -->
+			<p:layoutUnit id="left" position="west" size="250" collapsed="true"  collapsible="true" header="Opciones" gutter="0">				
+				<ui:insert name="nav-left">				
+				</ui:insert>
+			</p:layoutUnit>			
+<!-- 			<p:layoutUnit id="right" position="east" size="200" collapsible="true" header="Extras" gutter="0" > -->
+<!-- 				<ui:insert name="nav-right">				 -->
+<!-- 				</ui:insert> -->
+<!-- 			</p:layoutUnit> -->
+			<p:layoutUnit id="center" position="center">
+				<div id="center-content" align="center" >
+					<ui:insert name="body-content" >								
+					</ui:insert>
+				</div>
+			</p:layoutUnit>							
+		</p:layout>			
+	</h:body>
+	<script type="text/javascript">
+		function handleLoginRequest(xhr, status, args) {
+	        if(args.validationFailed || !args.loggedIn) {
+	            PF('dialogoLogin').jq.effect("shake", {times:5}, 100);	            
+	        }
+	        else {
+	            PF('dialogoLogin').hide();
+	            redirigirAPagina(args.view);
+	        }
+	    }
+		
+		function handleRequest(xhr, status, args) {
+	        if(args.validationFailed || !args.exito) {
+	        	//nada 
+	        }else{
+	        	redirigirAPagina(args.view);	        	
+	        }	        
+	    }
+	    
+		function logout(xhr, status, args) {
+			redirigirAPagina('/index.xhtml');			
+		}		
+		
+		function redirigirAPagina(pagina) {
+			  setTimeout(function() {
+				  window.location = '#{request.contextPath}'+pagina;
+			  }, 500);
+			}
+		
+		function recargarPagina() {
+			  setTimeout(function() {
+			    window.location.reload();
+			  }, 500);
+			}
+		
+		function cancelarSolicitud(){
+			if(confirm("¿Seguro que desea cancelar la solicitud?")){
+				redirigirAPagina('/views/administrador/');
+			}
+		}
+	</script>
+</html>

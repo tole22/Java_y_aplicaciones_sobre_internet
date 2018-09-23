@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<title>CEDICA - Coordinador</title>
+		<LINK href="../css/style.css" rel="stylesheet" type="text/css">
+	</head>
+	
+	<body>
+		<div class="header_index">
+<img alt="" src="../imagenes/cedica_header.png"><br>
+	<div class="menu_principal">
+<ul class="menu">
+    <li> <a href="../Close_Sesion" >Inicio</a></li>
+    <li> <a href="#" >Alumnos</a>
+    <ul>
+        	<li> <a href="nuevo_alu.html">Nuevo Alumno</a></li>
+           <li> <a href="listado_alu.html">Listado</a></li>
+        </ul> 
+    </li>
+    <li> <a href="#" >Legajos</a>
+    <ul>
+        	<li> <a href="legajo_alu_inst.html">Institucion</a></li>
+           <li> <a href="legajo_alu_familia.html">Familiares</a></li>
+        </ul> 
+    </li>
+    <li> <a href="lista_de_espera.html" >Lista de Espera</a></li>
+    <li> <a href="#" >Planificación</a>
+    	<ul>
+        	<li> <a href="agregar_planif.html">Agregar</a></li>
+        </ul> 
+    </li>
+    <li> <a href="../Close_Sesion" >Cerrar Sesión</a></li>
+    
+</ul>
+</div>
+</div>
+<br>
+	<div class="cuerpo_index">
+		<img alt="CEDICA" src="../imagenes/CEDICA.png" width="25%">	
+		<h1>---- CEDICA ----</h1>
+		<h2>Legajo ALumno Familiares</h2>
+		<h3>Seleccione el Alumno</h3>
+		<form action="../Generar_legajo" method="POST" >
+		  <select name="alumno" >
+		  <option value="">Seleccione</option>
+		  <option value="alu1">Maximiliano Toledo</option>
+		  <option value="alu2">Agustin Vazquez</option>
+		  <option value="alu3">Emiliano Moglia</option>
+		  <option value="alu4">Ariel Farkas</option>
+		</select>
+		<input type="hidden" value="familiar" name="param" />
+		  <input type="submit" value="Enviar">
+		</form>
+		</div>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html 	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui= "http://java.sun.com/jsf/facelets"		
+		xmlns:p="http://primefaces.org/ui"
+		>
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
+		<title>		
+			<ui:insert name="title" >
+				<h:outputText value="CEDICA | "/>
+			</ui:insert>			
+		</title>				 
+		<style type="text/css">
+			#center-content p,ul,li{
+				text-align: left;				 
+			}			
+			.pagetitle{
+				color: #60afdd;
+			}
+			
+			.ui-widget, .ui-widget .ui-widget {
+				font-size: 99% !important;
+			}
+			
+			#layout-header_content{
+				padding-bottom:0; 
+			}
+			.ui-layout-container{
+				/*width: 99% !important;*/
+				margin-left: 9% !important;
+				margin-right: 9% !important;
+			}
+			
+			.ui-layout-unit{
+				border: none;
+			}
+			
+            .ui-layout-north {
+               	z-index:20 !important; 
+                overflow:visible !important;
+                position:static !important;
+            }
+
+            .ui-layout-north .ui-layout-unit-content {
+                overflow:visible !important;
+            }
+            
+            .ui-layout-south .ui-layout-unit-content{
+            	background-color: dodgerblue;
+            	text-align: center;            	
+            }
+            .ui-layout-south {
+            	background-color: dodgerblue;            	
+            }
+            .ui-column-filter{
+            	width: 45% !important;
+            	height: 16.5px;
+            	font-size: smaller !important;             	          	
+            }
+            
+            .ui-wizard-step-title{            	
+             	background: none repeat scroll 0 0 rgba(0, 0, 0, 0) !important; 
+             	opacity: 0.8;
+             	color: skyblue !important;             	
+             	font-style:oblique !important;            	
+    			border-top-style: none !important;
+    			border-bottom-style: none !important;
+    			border-left-style: none !important;
+    			border-right-style: none !important;   					
+            }
+            .ui-carousel-header{
+            	border:none;
+            	background: none;
+            	margin-right: 50% !important;            	
+            }
+        </style>		
+	</h:head>
+	<h:body style="margin:0;">
+		<nav>
+			<p:panel id="layout-header" style="padding:0 10%;border-style:none none groove none;background-color: #eff3f7;">					
+				 		<h:graphicImage library="imagenes" name="cedica_header.png" width="100%" ></h:graphicImage>
+				 		<ui:insert name="header">
+						</ui:insert>	
+			</p:panel>
+		</nav>
+		<section>
+			<p:panel id="layout-center" style="padding-left: 10%;padding-right: 10%;border-style:none;">			
+				<div id="center-content" align="center" style="width:100%;min-height: 450px;">
+					<ui:insert name="body-content" >								
+					</ui:insert>
+				</div>									
+			</p:panel>
+		</section>
+		<footer>
+			<p:panel id="layout-footer" style="padding-left: 10%;padding-right: 10%;border-style:none none none groove;background-color: #60afdd;">
+				<div style="text-align:center;color:#ffffff !important;">					
+					<h:outputText value="CEDICA © Centro de Equitación para Personas con Discapacidad y Carencias " /><br/>
+					<h:outputLabel value="Teléfonos: "/><h:outputText value="(0221) 423-1070 al 78 Interno 304 - (0221) 15-506-6291 |"/><br/>
+					<h:outputLabel value="E-mail: "/><h:outputText value="equitacionparatodos@cedica.org.ar |"/><br/>
+					<p style="font-style:italic;font-size:x-small;"> Sitio desarrollado por el Grupo 8 de la Cátedra <a href='https://catedras.info.unlp.edu.ar/course/search.php?search=5505' target="_blank" style="color:#7f7200;">Java y Aplicaciones Avanzadas en Internet</a>, año 2014. Alumnos Vázquez Agustín y Toledo Maximiliano </p>					
+				</div>				
+			</p:panel>
+		</footer>		
+	</h:body>
+	<script type="text/javascript">
+		function handleLoginRequest(xhr, status, args) {
+	        if(args.validationFailed || !args.loggedIn) {
+	            PF('dialogoLogin').jq.effect("shake", {times:5}, 100);	            
+	        }
+	        else {
+	            PF('dialogoLogin').hide();
+	            redirigirAPagina(args.view);
+	        }
+	    }
+		
+		function handleRequest(xhr, status, args) {
+	        if(args.validationFailed || !args.exito) {
+	        	//nada 
+	        }else{
+	        	redirigirAPagina(args.view);	        	
+	        }	        
+	    }
+		
+		function agregarInstitucionEnSolicitud(xhr, status, args){
+			if(args.validationFailed || !args.exito) {
+	        	//nada 
+	        }else{
+	        	redirigirAPagina("/views/solicitudes/nueva_solicitud_institucion.xhtml");	        	
+	        }
+		}
+	    
+		function logout(xhr, status, args) {
+			redirigirAPagina('/');			
+		}		
+		
+		function redirigirAPagina(pagina) {
+			  setTimeout(function() {
+				  window.location = '#{request.contextPath}'+pagina;
+			  }, 500);
+			}
+		
+		function recargarPagina() {
+			  setTimeout(function() {
+			    window.location.reload();
+			  }, 500);
+			}
+		
+		function cancelarSolicitud(){
+			if(confirm("¿Seguro que desea cancelar la solicitud?")){
+				redirigirAPagina('/views/#{sessionScope.perfil}/');
+			}
+		}
+	</script>	
+</html>

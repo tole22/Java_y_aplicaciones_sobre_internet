@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:h="http://java.sun.com/jsf/html"
+				template="/views/templates/defaultTemplate.xhtml">
+	<ui:define name="title">
+		<h:outputText value="CEDICA | PRESENTACION"/>
+	</ui:define>
+	<ui:define name="header">
+		<ui:include src="/views/menu_principal.xhtml"></ui:include>
+	</ui:define>
+	<ui:define name="nav-left">		
+		<ui:include src="/views/nav-left.xhtml" />
+	</ui:define>
+	<ui:define name="body-content">	
+		<section>
+			<hgroup>
+				<h1 class="pagetitle">Presentación</h1>
+			</hgroup>
+		</section>
+		<section> 
+			<p>CEDICA es el Centro de Equitación para Personas con Discapacidad y Carenciadas, una Asociación Civil sin Fines de Lucro fundada en 1994 en la ciudad de La Plata, Provincia de Buenos Aires. Más allá de su actividad específica, la misión de CEDICA es la <b>inclusión social</b>. La institución trabaja con la finalidad de igualar oportunidades en procura de la reinserción familiar, el logro de la escolaridad, la integración laboral y la mejora integral de la calidad de vida. En este sentido, en CEDICA la actividad es <b>gratuita</b> para todos los alumnos y alumnas. Nos enorgullecemos al afirmar que somos una ONG próxima a cumplir 20 años de actividad ininterrumpida en pos de la inclusión social de las personas con discapacidad y carenciadas.</p>
+			<p align="left">Actualmente CEDICA trabaja para constituirse como una organización modelo en el área de las TACA a nivel provincial, nacional e internacional. La institución se encuentra abocada a diseñar los estándares de trabajo en TACA con el propósito de fomentar la certificación estatal de individuos y organizaciones que trabajan en TACA.</p>
+			<p align="left"><strong>SPB</strong></p>
+			<p align="left">Recientemente CEDICA firmó con el Servicio Penitenciario Bonaerense un Convenio para desarrollar el Programa de Actividades Asistidas con Animales Libres para Montar.</p>
+			<p align="left">Esta constituye la primera y única alianza entre un Estado provincial y una OSC, para desarrollar en unidades penitenciarias la rehabilitación social de internos con enfermedades mentales, discapacidad o patologías sociales.</p>
+			<p align="left"><strong>DE INTERÉS</strong></p>
+			<p align="left">CEDICA ha sido declarada:</p>
+			<ul>
+				<li>De Interés Legislativo por la Honorable Cámara de Diputados de la Provincia de Buenos Aires (Expte.D. 2545/2001).</li>
+				<li>De Interés Municipal por el Honorable Consejo Deliberante de la Ciudad de La Plata (D.299664/98).</li>
+				<li>De Interés Educativo por la Dirección General de Cultura y Educación de la Provincia de Buenos Aires (Expte. 5826-2654967/94).</li>
+				<li>Entidad de Bien Público por Ordenanza del Consejo Deliberante la Ciudad de La Plata, 1994.</li>
+			</ul>
+		</section>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
+    version="2.1">
+	
+	<navigation-rule>
+	<from-view-id>/views/login.xhtml</from-view-id>
+	
+	<navigation-case>
+	<from-outcome>administrador</from-outcome>
+	<to-view-id>/views/administrador/abm/inicio_admin.xhtml</to-view-id>
+	</navigation-case>
+	
+	<navigation-case>
+	<from-outcome>voluntario</from-outcome>
+	<to-view-id>/views/voluntario/inicio_volunt.xhtml</to-view-id>
+	</navigation-case>
+	
+	<navigation-case>
+	<from-outcome>coordinador</from-outcome>
+	<to-view-id>/views/coordinador/inicio_coord.xhtml</to-view-id>
+	</navigation-case>
+	
+	<navigation-case>
+	<from-outcome>failure</from-outcome>
+	<to-view-id>/views/login.xhtml</to-view-id>
+	</navigation-case>
+	</navigation-rule>
+	
+	<managed-bean>
+	<managed-bean-name>LoginBean</managed-bean-name>
+	<managed-bean-class>com.CEDICA.beans.LoginBean</managed-bean-class>
+	<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+	<managed-bean-name>UsuarioBean</managed-bean-name>
+	<managed-bean-class>com.CEDICA.beans.UsuarioBean</managed-bean-class>
+	<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	
+
+<navigation-rule>
+	<from-view-id>/views/administrador/adm/nuevo_usuario.xhtml</from-view-id>
+	<navigation-case>
+	<from-outcome>succes</from-outcome>
+	<to-view-id>/views/administrador/succes_admin.xhtml</to-view-id>
+	</navigation-case>
+	<navigation-case>
+	<from-outcome>failure</from-outcome>
+	<to-view-id>/views/administrador/adm/nuevo_usuario.xhtml</to-view-id>
+	</navigation-case>
+	
+	</navigation-rule>
+
+</faces-config>

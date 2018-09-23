@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<title>CEDICA - Administrador</title>
+		<LINK href="../css/style.css" rel="stylesheet" type="text/css">
+	</head>
+	<script type="text/javascript">
+		
+		function mostrarListado(){
+			
+			elem = document.getElementById("listado-caballos");
+			if(elem.style.display=="none")
+				elem.style.display="block";
+			
+		}
+		
+	</script>
+	<body>
+		<div class="header_index">
+<img alt="" src="../imagenes/cedica_header.png"><br>
+	<div class="menu_principal">
+		<ul class="menu">
+		    <li> <a href="../Close_Sesion" >Inicio</a></li>
+		    <li><a href="abm-usuarios.html">Usuarios</a></li>
+			<li><a href="abm-profesionales.html">Profesionales</a></li>
+			<li><a href="abm-voluntarios.html">Voluntarios</a></li>
+			<li><a href="abm-instituciones.html">Instituciones</a></li>
+			<li><a href="abm-caballos.html">Caballos</a></li>
+			<li> <a href="#" >Solicitudes</a>
+    			<ul>
+        	<li> <a href="nuevo_alu.html">Nueva Solicitud</a></li>
+           <li> <a href="listado_alu.html">Listado</a></li>
+        </ul> 
+    </li>
+			<li> <a href="#" >Lista de Espera</a>
+    			<ul>
+        		<li> <a href="agregar_lista.html">Agregar alumno</a></li>
+        		</ul> 
+    		</li>
+		    <li> <a href="../Close_Sesion" >Cerrar Sesión</a></li>
+		    	
+		</ul>
+		</div>
+	</div>
+	<br>
+	<div class="cuerpo_index">
+		<h1>---- CEDICA ----</h1>
+		<h2>Caballos</h2>
+		<h3>Nuevo Caballo</h3>
+		<form action="#">
+			<fieldset>
+				<legend>Datos Básicos</legend>
+				<label>Nombre</label><input type="text" name="nombre"><br>			
+				<label>Fecha de Nac.</label><input type="text" name="fnac"><br>
+				<label>Sexo:</label>Macho<input type="radio" name="sexo" value="Mcho">
+									Hembra<input type="radio" name="sexo" value="Mcho"><br>						
+				<label>Raza</label>
+					<select name="raza">
+						<option>Mestizo</option>
+						<option>Criollo</option>
+						<option>Fiordo</option>
+						<option>Pura Sangre</option>
+						<option>Haflinger</option>
+					</select><br>
+				<label>Pelaje</label>
+					<select name="pelaje">
+						<option>Tordo</option>
+						<option>Negro</option>
+						<option>Pardo</option>
+						<option>Zaino</option>
+						<option>Alazán</option>
+						<option>Overo</option>
+						<option>Bayo</option>
+						<option>Tobiano</option>
+					</select><br>
+			</fieldset>
+			<fieldset>
+				<legend>Medidas Hipométricas y Morfología</legend>
+				<label>Peso</label><input type="text" name="peso"><br>
+				<label>Alzada</label><input type="text" name="alzada"><br>
+				<label>Contorno Torácico</label><input type="text" name="torax"><br>
+				<label>Amplomos</label><input type="text" name="aplomo"><br>
+				<label>Observaciones</label><textarea rows="5" cols="20" name="observaciones"></textarea><br>				
+			</fieldset>	
+			<fieldset>
+				<legend>Historia Pre-CEDICA</legend>
+				<label>Doma</label><input type="text" name="doma"><br>
+				<label>Entrenamiento</label><input type="text" name="entrenamiento"><br>
+				<label>Relación con Ser Humano</label><input type="text" name="relacion"><br>
+				<label>Trabajo</label><input type="text" name="trabajo"><br>
+				<label>Salud(enfremedades y lesiones)</label><textarea rows="5" cols="20" name="salud"></textarea><br>
+				<label>Vacunación y Desparacitación</label><input type="text" name="vacunydesp"><br>
+				<label>Alimentación</label><input type="text" name="alimentacion"><br>
+				<label>Cama</label><input type="text" name="cama"><br>
+				<label>Herraje</label><input type="text" name="herraje"><br>				
+			</fieldset>	
+			<fieldset>
+				<legend>Historia CEDICA</legend>
+				<label>Compra/Donación</label><input type="text" name="compra"><br>
+				<label>Fecha de Ingreso</label><input type="text" name="fechaingreso"><br>
+				<label>Sede Asignada</label><input type="text" name="sede"><br>
+				<label>Entrenadores y Conductores</label><textarea rows="5" cols="20" name="entrenadores"></textarea><br>
+				<label>Tipo de Alumnos Asignados</label><textarea rows="5" cols="20" name="tipoalumnos"></textarea><br>							
+			</fieldset>												
+			<input type="button" value="Agregar">			
+		</form>
+		<a href="#" onClick="mostrarListado()">Listado</a>
+		<table id="listado-caballos" style="display : none">
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Raza</th>
+					<th>Sexo</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Soy Tordillo</td>
+					<td>Criollo</td>					
+					<td><input type="button" value="Editar"></td>
+					<td><input type="button" value="Eliminar"></td>
+				</tr>
+				<tr>
+					<td>Tornado</td>
+					<td>Pura Sangre</td>					
+					<td><input type="button" value="Editar"></td>
+					<td><input type="button" value="Eliminar"></td>
+				</tr>
+				<tr>
+					<td>Azabache</td>
+					<td>Pura Sangre</td>					
+					<td><input type="button" value="Editar"></td>
+					<td><input type="button" value="Eliminar"></td>
+				</tr>			
+				<tr>
+					<td>Candelaria</td>
+					<td>Mestiza</td>					
+					<td><input type="button" value="Editar"></td>
+					<td><input type="button" value="Eliminar"></td>
+				</tr>			
+			</tbody>
+		</table>
+		</div>
+</body>
+</html>

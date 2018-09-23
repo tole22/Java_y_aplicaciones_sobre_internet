@@ -1,0 +1,44 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:f="http://java.sun.com/jsf/core">	
+	<h6 align="right" style="margin: 0;color:peru;">Usted ha iniciado sesión como '#{LoginBean.username}'...</h6>
+   	<p:growl id="global_messages"/> 
+    <p:menubar>	        
+        <p:menuitem value="Inicio" url="/views/administrador/index.xhtml" icon="ui-icon-home"/>				           
+        <p:submenu label="Usuarios" icon="ui-icon-person">
+            <p:menuitem value="Nuevo Usuario" url="/views/administrador/nuevo_usuario.xhtml" />	          
+            <p:menuitem value="Listado" url="/views/administrador/listado_usuarios.xhtml" />	           	            
+        </p:submenu>
+        <p:submenu label="Instituciones" icon="ui-icon-tag">
+            <p:menuitem value="Agregar Institución" url="/views/administrador/nueva_institucion.xhtml" />
+            <p:menuitem value="Listado" url="/views/administrador/listado_instituciones.xhtml" />            	           	            
+        </p:submenu>
+        <p:submenu label="Solicitudes" icon="ui-icon-tag">
+            <p:menuitem value="de Particulares" url="/views/solicitudes/nueva_solicitud_particular.xhtml" />
+            <p:menuitem value="de Instituciones" url="/views/solicitudes/nueva_solicitud_institucion.xhtml" />	
+            <p:menuitem value="Lista de Espera" url="#" />          
+            <p:menuitem value="Listado" url="/views/solicitudes/listado.xhtml" />	           	            
+        </p:submenu>
+        
+        <f:facet name="options">        
+            <p:inputText style="margin-right:10px" placeholder="Buscar"/>           	
+           	<p:commandButton id="botonLogout" type="button" value="Cerrar Sesión" icon="ui-icon-extlink" 
+           					onclick="PF('dialogoLogout').show();"/>            
+        </f:facet>	        	 		
+    </p:menubar>
+    <h:form id="loginForm">
+	    <p:growl id="session_messages"/>
+	    <p:dialog header="Logout" widgetVar="dialogoLogout" resizable="false" modal="true" >
+	        <h:panelGrid columns="2" cellpadding="5">
+	        	<p:outputLabel>¿Está seguro que desea cerrar la sesión?</p:outputLabel>
+	            <f:facet name="footer">
+	                <p:commandButton value="Cerrar Sesión" update="session_messages" actionListener="#{LoginBean.logout}"
+	                                 oncomplete="logout(xhr, status, args)" />
+	                <p:commandButton value="Cancelar" type="button" onclick="PF('dialogoLogout').hide();" />
+	            </f:facet> 
+	        </h:panelGrid>
+	    </p:dialog>	   
+	</h:form>	
+</ui:composition>

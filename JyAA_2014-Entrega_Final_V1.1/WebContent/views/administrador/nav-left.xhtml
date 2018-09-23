@@ -1,0 +1,23 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:f="http://java.sun.com/jsf/core">	
+	<p:panelMenu>			
+		<p:submenu label="Usuarios" >
+            <p:menuitem value="Nuevo Usuario" url="/views/administrador/nuevo_usuario.xhtml" icon="ui-icon-tag"/>	          
+            <p:menuitem value="Listado" url="/views/administrador/listado_usuarios.xhtml"  icon="ui-icon-tag"/>	           	            
+        </p:submenu>
+        <p:submenu label="Instituciones" >
+            <p:menuitem value="Agregar Institución" url="/views/administrador/nueva_institucion.xhtml" icon="ui-icon-tag"/>
+            <p:menuitem value="Listado" url="/views/administrador/listado_instituciones.xhtml" icon="ui-icon-tag"/>            	           	            
+        </p:submenu>
+        <p:submenu label="Solicitudes" >
+            <p:menuitem value="de Particulares" url="/views/solicitudes/nueva_solicitud_particular.xhtml" icon="ui-icon-tag"/>
+            <p:menuitem value="de Instituciones" url="/views/solicitudes/nueva_solicitud_institucion.xhtml" icon="ui-icon-tag"/>	
+           	<p:menuitem value="Lista de Espera" url="#" icon="ui-icon-tag"/>    	          
+            <p:menuitem value="Listado" url="/views/solicitudes/listado.xhtml" icon="ui-icon-tag"/>	           	            
+        </p:submenu>
+	</p:panelMenu>
+</ui:composition>	
+				
